@@ -3032,7 +3032,7 @@ body.debug-hotspots .hotspot{opacity: 1;
   .cover-hero.cover-hero--full .cover-overlay .cover-glass{
     width: min(92vw, 520px) !important;
     max-height: calc(100dvh - 74px - 24px) !important;
-    overflow: auto !important;
+    overflow: hidden !important;
     -webkit-overflow-scrolling: touch !important;
 
     padding: 10px !important;
