@@ -2928,6 +2928,7 @@ body.debug-hotspots .hotspot{opacity: 1;
   /* 2) capa sem efeitos que tremem no Safari */
   .cover-hero--full{
     overflow: hidden;
+    overflow-x: hidden;
   }
 
   .cover-hero--full .cover-bg{
@@ -2939,6 +2940,7 @@ body.debug-hotspots .hotspot{opacity: 1;
   .cover-hero--full .cover-overlay{
     padding: 12px 12px calc(14px + env(safe-area-inset-bottom)) !important;
     place-items: start center !important;
+    overflow-x: hidden;
   }
 
   /* 4) O principal: largura real do “glass” sem ultrapassar */
@@ -2949,6 +2951,7 @@ body.debug-hotspots .hotspot{opacity: 1;
     margin: 0 auto;
     transform: none !important;            /* tira rotação no iPhone */
     overflow: visible !important;          /* evita scroll interno tremendo */
+    overflow-x: hidden;
   }
 
   /* 5) botões em coluna (sem “puxar” largura) */
