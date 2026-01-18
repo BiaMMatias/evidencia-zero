@@ -3033,6 +3033,7 @@ body.debug-hotspots .hotspot{opacity: 1;
     width: min(92vw, 520px) !important;
     max-height: calc(100dvh - 74px - 24px) !important;
     overflow: hidden !important;
+    overflow-x: hidden !important;
     -webkit-overflow-scrolling: touch !important;
 
     padding: 10px !important;
