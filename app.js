@@ -1436,7 +1436,7 @@ function renderCover(state) {
   ui.app.innerHTML = `
     <section class="cover-hero cover-hero--full">
       <!-- imagem ocupando 100% do bloco -->
-      <img class="cover-bg" src="./assets/ui/pasta-mesa.jpg" alt="" aria-hidden="true" />
+      
 
       <!-- conteúdo por cima (título + texto + botões) -->
       <div class="cover-overlay">

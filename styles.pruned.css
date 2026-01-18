@@ -2812,3 +2812,49 @@ body.debug-hotspots .hotspot{opacity: 1;
     transform: none; /* tira inclinação no mobile */
   }
 }
+
+/* ===== FIX iPhone (capa): sem jitter, botões ok ===== */
+@media (max-width: 720px){
+
+  /* iOS treme com background-attachment: fixed */
+  body{
+    background-attachment: scroll !important;
+  }
+
+  /* capa ocupa a tela real do iPhone */
+  .cover-hero--full{
+    min-height: 100svh; /* melhor que vh no iOS */
+  }
+
+  /* se você usa <img class="cover-bg"> */
+  .cover-hero--full .cover-bg{
+    object-position: center top;
+    transform: none !important;
+  }
+
+  /* o “carimbo” não pode girar no mobile */
+  .cover-glass{
+    padding: 18px 16px !important;
+    transform: none !important;
+    border-radius: 18px;
+  }
+
+  .cover-glass .cover-title,
+  .cover-title{
+    font-size: clamp(34px, 9vw, 46px) !important;
+    line-height: 1.05;
+  }
+
+  /* botões: coluna + largura total */
+  .cover-actions2{
+    display: grid !important;
+    gap: 10px !important;
+  }
+  .cover-actions2 .btn{
+    width: 100%;
+    padding: 12px 14px !important;
+    font-size: 12px !important;
+    letter-spacing: .12em !important;
+    transform: none !important;
+  }
+}
