@@ -1442,9 +1442,9 @@ function renderCover(state) {
       <div class="cover-overlay">
         <div class="cover-glass">
 
-          <h1 class="cover-title">${escapeHtml(
-            CASE.cover?.headline || "EVIDÊNCIA ZERO"
-          )}</h1>
+          <h1 class="cover-title" data-text="${escapeHtml(CASE.cover?.headline || "EVIDÊNCIA ZERO")}">
+            ${escapeHtml(CASE.cover?.headline || "EVIDÊNCIA ZERO")}
+          </h1>
 
           <p class="cover-sub2">
             Um hub investigativo. Locais, pessoas, peças soltas. Nenhuma ordem correta.
