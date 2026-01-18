@@ -19,7 +19,7 @@
   --r-sm: 12px;
 
   /* === PASTA / PAPEL (controle rápido) === */
-  --folder-img: url("./assets/ui/pasta-craft.png");
+  /* --folder-img: url("./assets/ui/pasta-craft.png"); */
   --paper-ink: #1f1b14;
   --paper-text: #2c261c;
   --paper-muted: #3a3327;
@@ -188,6 +188,7 @@ a{color:inherit; text-decoration:none;}
   background-repeat: no-repeat;
   background-position: center;
   filter: drop-shadow(0 30px 60px rgba(0,0,0,.45));}
+
 @media (max-width: 980px){.cover-hero{min-height: 320px;}}
 .cover-hero::after{content:"";
   position:absolute;
@@ -1009,6 +1010,7 @@ body{color: #1c1a16;
 
 .cover-sub2{margin: 0 0 16px;
   font-size: 15px;
+  font-weight: 600;
   line-height: 1.55;
   color: rgba(255,255,255,.78);}
 
@@ -1078,6 +1080,7 @@ body{color: #1c1a16;
 /* rodapé discreto */
 .cover-footnote{margin-top: 16px;
   font-size: 15px;
+  font-weight: 700;
   color: rgba(0,0,0,.6);}
 
 /* responsivo */
@@ -1119,10 +1122,10 @@ body{color: #1c1a16;
 
   background:
     /* falhas pontuais */
-    radial-gradient(3px 3px at 14% 22%, rgba(0,0,0,.22), transparent 60%),
-    radial-gradient(2px 2px at 36% 64%, rgba(0,0,0,.18), transparent 60%),
-    radial-gradient(3px 3px at 72% 18%, rgba(0,0,0,.20), transparent 60%),
-    radial-gradient(2px 2px at 88% 76%, rgba(0,0,0,.16), transparent 60%),
+    radial-gradient(3px 3px at 14% 22%, rgba(0,0,0,.22), transparent 50%),
+    radial-gradient(2px 2px at 36% 64%, rgba(0,0,0,.18), transparent 50%),
+    radial-gradient(3px 3px at 72% 18%, rgba(0,0,0,.20), transparent 50%),
+    radial-gradient(2px 2px at 88% 76%, rgba(0,0,0,.16), transparent 30%),
 
     /* desgaste linear (borracha) */
     repeating-linear-gradient(
@@ -2742,6 +2745,7 @@ body.debug-hotspots .hotspot{opacity: 1;
   .cover-sub2{
     font-size: 14px;
     line-height: 1.45;
+    font-weight: 600;
   }
 
   /* Botões empilham */
@@ -2790,11 +2794,13 @@ body.debug-hotspots .hotspot{opacity: 1;
 
   .cover-sub2 {
     font-size: 14px;
+    font-weight: 600;
     line-height: 1.45;
   }
 
   .cover-footnote {
     font-size: 13px;
+    font-weight: 700;
     margin-top: 10px;
   }
 
@@ -2857,4 +2863,52 @@ body.debug-hotspots .hotspot{opacity: 1;
     letter-spacing: .12em !important;
     transform: none !important;
   }
+}
+
+/* =========================
+   CAPA — vidro e botões mais sólidos
+   (cole no FINAL do CSS)
+========================= */
+
+/* bloco principal (menos transparente + mais legível) */
+.cover-glass{
+  background: rgba(231,220,201,.62) !important;  /* era .14 -> agora bem mais presente */
+  border-color: rgba(38,30,22,.55) !important;
+  box-shadow:
+    inset 0 0 0 2px rgba(38,30,22,.14),
+    inset 0 14px 22px rgba(0,0,0,.14),
+    0 18px 38px rgba(0,0,0,.18) !important;
+}
+
+/* texto da capa escurece um pouco (fica “tinta no papel”) */
+.cover-sub2{
+  color: rgba(28,22,16,.82) !important;
+}
+.cover-footnote{
+  color: rgba(28,22,16,.70) !important;
+}
+
+/* botões mais sólidos (menos transparente) */
+.cover-actions2 .btn{
+  background: rgba(231,220,201,.78) !important;
+  border-color: rgba(38,30,22,.55) !important;
+  color: rgba(26,20,14,.82) !important;
+}
+
+/* variações */
+.cover-actions2 .btn.primary{
+  background: rgba(176,123,18,.20) !important;
+  border-color: rgba(176,123,18,.70) !important;
+  color: rgba(92,64,10,.88) !important;
+}
+.cover-actions2 .btn.danger{
+  background: rgba(126,36,54,.16) !important;
+  border-color: rgba(126,36,54,.70) !important;
+  color: rgba(88,22,36,.88) !important;
+}
+
+/* iPhone: remove rotação e evita “dança” */
+@media (max-width: 720px){
+  .cover-glass{ transform: none !important; }
+  .cover-actions2 .btn{ transform: none !important; }
 }
