@@ -3009,7 +3009,7 @@ body.debug-hotspots .hotspot{opacity: 1;
 
   .cover-hero--full .cover-glass{
     min-height: 140vh;                /* garante espaço pros botões */
-    padding-bottom: 18px;            /* respiro visual */
+    padding-bottom: 5px;            /* respiro visual */
     display: flex;
     flex-direction: column;
     justify-content: space-between;  /* empurra botões pra baixo */
@@ -3018,7 +3018,7 @@ body.debug-hotspots .hotspot{opacity: 1;
   /* bloco de texto não “briga” com botões */
   .cover-sub2,
   .cover-footnote{
-    margin-bottom: 12px;
+    margin-bottom: 5px;
   }
 
   /* ações sempre visíveis e confortáveis */
