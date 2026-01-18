@@ -2985,8 +2985,6 @@ body.debug-hotspots .hotspot{opacity: 1;
   .cover-hero--full .cover-glass{
     box-sizing: border-box;
     width: 100% !important;          /* agora é 100% do overlay */
-    height: 100% !important;
-    max-height: fit-content;
     max-width: 520px !important;     /* limite “bonito” */
     margin: 0 !important;            /* já tá centralizado pelo overlay */
     transform: none !important;      /* sem rotação no iPhone */
@@ -3001,5 +2999,30 @@ body.debug-hotspots .hotspot{opacity: 1;
   .cover-actions2 .btn{
     width: 100%;
     transform: none !important;
+  }
+}
+
+/* =========================
+   MOBILE — altura confortável do cover-glass
+========================= */
+@media (max-width: 720px){
+
+  .cover-hero--full .cover-glass{
+    min-height: 78vh;                /* garante espaço pros botões */
+    padding-bottom: 18px;            /* respiro visual */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;  /* empurra botões pra baixo */
+  }
+
+  /* bloco de texto não “briga” com botões */
+  .cover-sub2,
+  .cover-footnote{
+    margin-bottom: 12px;
+  }
+
+  /* ações sempre visíveis e confortáveis */
+  .cover-actions2{
+    margin-top: 14px;
   }
 }
