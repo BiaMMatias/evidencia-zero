@@ -1005,9 +1005,6 @@ body{color: #1c1a16;
 
 /* tipografia */
 
-
-
-
 .cover-sub2{margin: 0 0 16px;
   font-size: 15px;
   font-weight: 600;
@@ -2960,6 +2957,45 @@ body.debug-hotspots .hotspot{opacity: 1;
     gap: 10px !important;
   }
 
+  .cover-actions2 .btn{
+    width: 100%;
+    transform: none !important;
+  }
+}
+
+/* =========================
+   MOBILE: cover-glass “dentro” do overlay
+========================= */
+@media (max-width: 720px){
+
+  /* overlay vira o “container” real */
+  .cover-hero--full .cover-overlay{
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+
+    /* centraliza e garante padding interno */
+    display: flex !important;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 12px 12px calc(14px + env(safe-area-inset-bottom)) !important;
+  }
+
+  /* glass ocupa o overlay (sem passar da borda) */
+  .cover-hero--full .cover-glass{
+    box-sizing: border-box;
+    width: 100% !important;          /* agora é 100% do overlay */
+    max-width: 520px !important;     /* limite “bonito” */
+    margin: 0 !important;            /* já tá centralizado pelo overlay */
+    transform: none !important;      /* sem rotação no iPhone */
+    overflow: visible !important;    /* evita jitter */
+  }
+
+  /* botões sempre “dentro” e em coluna */
+  .cover-actions2{
+    display: grid !important;
+    gap: 10px !important;
+  }
   .cover-actions2 .btn{
     width: 100%;
     transform: none !important;
