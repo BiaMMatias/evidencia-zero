@@ -3008,7 +3008,7 @@ body.debug-hotspots .hotspot{opacity: 1;
 @media (max-width: 720px){
 
   .cover-hero--full .cover-glass{
-    min-height: 100vh;                /* garante espaço pros botões */
+    min-height: 140vh;                /* garante espaço pros botões */
     padding-bottom: 18px;            /* respiro visual */
     display: flex;
     flex-direction: column;
