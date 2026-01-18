@@ -1,0 +1,2686 @@
+:root{/* True crime palette */
+  --bg:#070b14;
+  --panel:#0b1022;
+  --panel2:#0f1730;
+
+  --text:#e8ecf8;
+  --muted:#aab3d6;
+  --line:rgba(170,179,214,.18);
+
+  --accent:#22d3ee;      /* detalhes */
+  --amber:#b07b12;       /* evidência */
+  --wine:#7e2436;        /* tensão */
+  --violet:#4a2a92;      /* dúvida */
+
+  --shadow: 0 18px 60px rgba(0,0,0,.55);
+
+  --r-lg: 18px;
+  --r-md: 14px;
+  --r-sm: 12px;
+
+  /* === PASTA / PAPEL (controle rápido) === */
+  --folder-img: url("./assets/ui/pasta-craft.png");
+  --paper-ink: #1f1b14;
+  --paper-text: #2c261c;
+  --paper-muted: #3a3327;
+
+  /* “papel/jornal” (sutil) */
+  --paper: rgba(255,255,255,.055);
+  --paper2: rgba(255,255,255,.025);}
+
+/* =========================
+   RESET / BASE
+========================= */
+*{box-sizing:border-box;}
+
+html, body{height:100%;}
+
+body{margin:0;
+  color:var(--text);
+  background:
+    /* luz suave vinda de cima (abajur / sala) */
+    radial-gradient(
+      1200px 700px at 50% -15%,
+      rgba(255,255,255,.045),
+      transparent 60%
+    ),
+
+    /* manchas orgânicas de papel / parede */
+    radial-gradient(
+      900px 600px at 18% 35%,
+      rgba(58,51,39,.10),
+      transparent 62%
+    ),
+    radial-gradient(
+      900px 600px at 82% 30%,
+      rgba(126,36,54,.08),
+      transparent 65%
+    ),
+
+    /* vinheta pesada (fecha o ambiente) */
+    radial-gradient(
+      1400px 1000px at 50% 115%,
+      rgba(0,0,0,.75),
+      transparent 55%
+    ),
+
+    /* base sólida */
+    linear-gradient(
+      180deg,
+      #05060f,
+      #070b14 45%,
+      #05060f
+    );
+
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  font-size:16px;
+  line-height:1.6;}
+
+a{color:inherit; text-decoration:none;}
+[hidden]{display:none !important;}
+
+/* grain overlay */
+.bg-grain{position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.06) 0, transparent 60%),
+    radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,.04) 0, transparent 60%),
+    radial-gradient(1px 1px at 40% 55%, rgba(255,255,255,.035) 0, transparent 60%);
+  opacity:.22;
+  mix-blend-mode: overlay;}
+
+/* =========================
+   TOP BAR
+========================= */
+.top{position:sticky;
+  top:0;
+  z-index:50;
+  border-bottom:1px solid var(--line);
+  background: rgba(7,11,20,.78);
+  backdrop-filter: blur(10px);}
+.top-inner{max-width: 1120px;
+  margin: 0 auto;
+  padding: 12px 14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;}
+.brand{display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;}
+.brand-dot{width:10px;height:10px;border-radius:50%;
+  background: var(--accent);
+  box-shadow: 0 0 18px rgba(34,211,238,.45);}
+.brand-title{font-weight:900;
+  letter-spacing:.22em;
+  font-size:12px;}
+.brand-sub{font-size:12px;
+  color:var(--muted);
+  opacity:.9;}
+.top-actions{display:flex; gap:10px; align-items:center; flex-wrap: wrap;}
+
+/* =========================
+   APP WRAP
+========================= */
+.app{max-width: 1120px;
+  margin: 0 auto;
+  padding: 18px 14px 80px;}
+
+/* =========================
+   BUTTONS
+========================= */
+.btn{border:1px solid var(--line);
+  background: rgba(11,16,34,.58);
+  color:var(--text);
+  padding:10px 12px;
+  border-radius: 14px;
+  cursor:pointer;
+  transition: transform .08s ease, background .15s ease, border-color .15s ease, filter .15s ease;
+  user-select:none;}
+.btn:hover{background: rgba(15,23,48,.78);
+  border-color: rgba(34,211,238,.28);
+  filter: saturate(1.05);}
+.btn:active{transform: translateY(1px);}
+.btn.ghost{background: transparent;}
+.btn.primary{border-color: rgba(34,211,238,.50);
+  background: rgba(34,211,238,.12);}
+.btn.danger{border-color: rgba(251,113,133,.45);
+  background: rgba(251,113,133,.10);}
+
+/* =========================
+   TIPOGRAFIA HELPERS
+========================= */
+
+
+.p{margin:0; color:var(--muted); line-height:1.55;}
+.tiny{font-size: 13px; color:var(--muted); line-height:1.45;}
+.dim{opacity:.85;}
+
+/* =========================
+   CARD GENÉRICO
+========================= */
+
+.badge{display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background: rgba(7,11,20,.45);
+  color: var(--muted);
+  font-size:12px;}
+.badge-dot{width:8px;height:8px;border-radius:50%;
+  background: var(--accent);
+  box-shadow:0 0 12px rgba(34,211,238,.35);}
+
+/* =========================
+   COVER (PASTA CRAFT)
+========================= */
+
+.cover-hero{min-height: 420px;
+  position:relative;
+  border-radius: var(--r-lg);
+  overflow:hidden;
+  background: var(--folder-img);
+  background-size: 108%;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: drop-shadow(0 30px 60px rgba(0,0,0,.45));}
+@media (max-width: 980px){.cover-hero{min-height: 320px;}}
+.cover-hero::after{content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(900px 520px at 50% 35%, transparent 55%, rgba(0,0,0,.22) 100%);
+  pointer-events:none;
+  opacity:.65;}
+
+
+.notice{border:1px solid rgba(170,179,214,.14);
+  background: rgba(7,11,20,.30);
+  border-radius: var(--r-md);
+  padding: 12px;}
+
+/* =========================
+   HUB LAYOUT (SEM DASHBOARD)
+========================= */
+.hub-layout{display:block;}
+
+/* grid “mesa de investigação” */
+.main-cards{display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 18px;
+  align-items: stretch;}
+
+/* base card */
+.nav-card{border-radius: 20px;
+  border: 1px solid rgba(255,255,255,.10);
+  background:
+    radial-gradient(900px 260px at 18% 0%, var(--paper), transparent 60%),
+    linear-gradient(180deg, var(--paper2), rgba(0,0,0,.16)),
+    rgba(11,16,34,.56);
+  box-shadow: 0 24px 70px rgba(0,0,0,.58), inset 0 1px 0 rgba(255,255,255,.05);
+  overflow:hidden;
+  min-height: 340px; /* mais “cumprido” */
+  display:flex;
+  flex-direction:column;
+  cursor:pointer;
+  transition: transform .16s ease, border-color .18s ease, filter .18s ease;
+  isolation:isolate;}
+.nav-card:hover{transform: translateY(-3px);
+  border-color: rgba(34,211,238,.35);
+  filter: saturate(1.05);}
+
+/* tag */
+.tag{display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(230,234,242,.70);}
+.tag .dot{width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(34,211,238,.88);
+  box-shadow: 0 0 0 3px rgba(34,211,238,.10);}
+.tag.wine .dot{background: rgba(126,36,54,.88);
+  box-shadow: 0 0 0 3px rgba(126,36,54,.10);}
+.tag.amber .dot{background: rgba(176,123,18,.92);
+  box-shadow: 0 0 0 3px rgba(176,123,18,.12);}
+
+/* “carimbo” (SEM absolute pra não sobrepor) */
+.stamp-mini{display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(0,0,0,.18);
+  color: rgba(255,255,255,.70);
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  font-weight: 900;
+  white-space: nowrap;}
+
+/* =========================
+   FILE CARDS (VÍTIMA/ARMAS/LOCAIS/SUSPEITOS)
+   IMAGEM NO TOPO + TEXTO EMBAIXO
+========================= */
+.nav-card.nav-card--file .thumb{height: 300px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  background: rgba(0,0,0,.18);
+  position: relative;}
+.nav-card.nav-card--file .thumb img{width:90%;
+  height:90%;
+  object-fit: fill;
+  display:block;
+  filter: contrast(1.05) saturate(.92);
+  transform: scale(1.01);}
+
+/* clipzinho de “anexo” */
+.nav-card.nav-card--file .thumb::after{content:"";
+  position:absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 34px;
+  height: 12px;
+  border-radius: 0 0 9px 9px;
+  background: rgba(255,255,255,.22);
+  opacity:.55;
+  box-shadow: 0 14px 18px rgba(0,0,0,.25);}
+
+.nav-card.nav-card--file .file-body{padding: 16px 16px 18px;
+  display:flex;
+  flex-direction:column;
+  gap: 10px;
+  flex: 1;}
+
+.nav-card.nav-card--file h3{margin: 0;
+  font-size: 1.55rem;
+  font-weight: 950;
+  line-height: 1.1;
+  letter-spacing: .01em;}
+.nav-card.nav-card--file .meta{margin: 0;
+  color: rgba(255,255,255,0.02);
+  line-height: 1.55;}
+
+.nav-card.nav-card--file .file-footer{margin-top: auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 10px;}
+
+/* =========================
+   CRIME COMO JORNAL (NEWS)
+========================= */
+.nav-card--news{grid-column: 1 / -1;
+  min-height: unset;
+  display:block;
+  cursor:pointer;
+  border-radius: 22px;
+  overflow:hidden;
+  border: 1px solid rgba(255,255,255,.10);
+  box-shadow: 0 30px 90px rgba(0,0,0,.60);
+  background: rgba(11,16,34,.62);}
+
+.nav-card--news .news-photo{position: relative;
+  height: 270px;
+  background: rgba(0,0,0,.25);
+  border-bottom: 1px solid rgba(255,255,255,.08);}
+.nav-card--news .news-photo img{width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display:block;
+  filter: contrast(1.05) saturate(.92);}
+.nav-card--news .news-strip{position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(0,0,0,.45);
+  border: 1px solid rgba(255,255,255,.14);
+  color: rgba(255,255,255,.82);
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  font-weight: 900;}
+
+.nav-card--news .news-body{padding: 18px 20px 20px;
+  background:
+    radial-gradient(900px 220px at 20% 0%, var(--paper), transparent 60%),
+    linear-gradient(180deg, var(--paper2), rgba(0,0,0,.18)),
+    rgba(11,16,34,.62);}
+
+.nav-card--news .news-meta{display:flex;
+  flex-wrap:wrap;
+  gap: 10px;
+  align-items:center;
+  margin-bottom: 10px;
+  color: rgba(255,255,255,0.02);
+  font-size: 12px;}
+
+.nav-card--news .paper-tag{padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(0,0,0,.18);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  font-weight: 900;}
+
+.nav-card--news .news-headline{margin: 0 0 10px;
+  font-size: 2.05rem;
+  font-weight: 950;
+  line-height: 1.06;
+  letter-spacing: .01em;}
+.nav-card--news .news-sub{margin: 0 0 16px;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: rgba(230,234,242,.76);}
+
+.nav-card--news .news-footer{display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;}
+.nav-card--news .byline{font-size: 12px;
+  color: rgba(230,234,242,.62);
+  letter-spacing: .02em;}
+
+/* =========================
+   CONCLUSÃO COMO RELATÓRIO (REPORT)
+========================= */
+.nav-card--report{grid-column: 1 / -1;
+  min-height: unset;
+  padding: 16px;
+  border-radius: 22px;
+  padding: 15px;}
+
+.nav-card--report .report-head{padding: 15px 14px 14px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(0,0,0,.18);
+  margin: 12px;}
+.nav-card--report .report-kicker{font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(230,234,242,.68);
+  margin-bottom: 8px;}
+.nav-card--report h3{margin: 0 0 8px;
+  font-size: 1.75rem;
+  font-weight: 950;
+  line-height: 1.12;}
+.nav-card--report .meta{margin: 0;
+  color: rgba(255,255,255,0.02);
+  line-height: 1.5;}
+
+.nav-card--report .report-body{display:flex;
+  flex-direction:column;
+  gap: 10px;
+  padding: 0 6px;}
+.nav-card--report .report-line{display:flex;
+  justify-content:space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.02);}
+.nav-card--report .report-line b{color: rgba(255,255,255,.88);}
+.nav-card--report .report-line span{color: rgba(230,234,242,.70);
+  text-align:right;}
+.nav-card--report .report-footer{margin-top: 12px;
+  display:flex;
+  justify-content:flex-end;}
+
+/* =========================
+   ITEM / PILL (modais)
+========================= */
+.item{border:1px solid var(--line);
+  border-radius: var(--r-md);
+  background: rgba(7,11,20,.10);
+  padding: 12px;
+  margin: 10px;}
+.item b{display:block; margin-bottom: 6px;}
+.item .meta{color: var(--muted); font-size: 12px; line-height: 1.45;}
+.item-actions{margin-top: 10px; display:flex; gap:10px; flex-wrap:wrap;}
+
+
+
+/* =========================
+   MODAL (scroll correto)
+========================= */
+.modal{position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 18px;}
+
+.modal-card{width: min(760px, 100%);
+  max-height: calc(100vh - 36px);
+  display: flex;
+  flex-direction: column;
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(10, 12, 18, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.55);}
+
+.modal-head{flex: 0 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);}
+
+.modal-title{max-width: 100%;
+  font-size: 14px;
+  line-height: 1.25;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-weight: 800;}
+
+#btnCloseModal.btn.ghost{flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 999px;}
+
+.modal-body{flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 16px;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;}
+
+.modal-body img{width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 14px;}
+
+.modal-backdrop{position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.62);
+  backdrop-filter: blur(2px);
+  z-index: -1;}
+
+/* =========================
+   INVENTÁRIO DRAWER
+========================= */
+
+/* backdrop neutro */
+.inventory-backdrop{
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  background: rgba(0,0,0,.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease;
+}
+.inventory-backdrop.open{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.inventory-drawer{
+  position: fixed;
+  top: 70px;                /* abaixo do header */
+  left: 50%;
+  transform: translate(-50%, -130%);
+  width: min(860px, 94vw);
+  height: min(78vh, 720px);
+
+  background: rgba(248,244,236,.96);
+  border: 1px solid rgba(40,32,22,.18);
+  border-radius: 22px;
+
+  transition: transform .28s cubic-bezier(.22,.8,.25,1);
+  z-index: 60;
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  box-shadow:
+    0 30px 60px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.65);
+}
+
+/* estado aberto */
+.inventory-drawer.open{
+  transform: translate(-50%, 0);
+}
+/* ARGOLAS DO FICHÁRIO */
+.inventory-drawer::before{
+  content:"";
+  position:absolute;
+  left: 14px;
+  top: 16px;
+  bottom: 16px;
+  width: 26px;
+
+  background:
+    radial-gradient(circle at 50% 40px, #888 6px, transparent 7px),
+    radial-gradient(circle at 50% 120px, #888 6px, transparent 7px),
+    radial-gradient(circle at 50% 200px, #888 6px, transparent 7px),
+    radial-gradient(circle at 50% 280px, #888 6px, transparent 7px),
+    radial-gradient(circle at 50% 360px, #888 6px, transparent 7px);
+
+  opacity:.55;
+}
+
+/* ÁREA DAS FOLHAS */
+.inventory-drawer::after{
+  content:"";
+  position:absolute;
+  inset: 12px 12px 12px 44px;
+  border-radius: 6px 12px 12px 6px;
+
+  background:
+    linear-gradient(180deg,#faf7f2,#f2ede4);
+
+  box-shadow:
+    inset 0 0 0 1px rgba(40,32,22,.15),
+    inset 0 12px 18px rgba(0,0,0,.08);
+
+  pointer-events:none;
+}
+
+/* HEAD — etiqueta do fichário */
+.inventory-head{
+  position: relative;
+  z-index: 1;
+  padding: 14px 16px 10px 56px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom: 1px solid rgba(40,32,22,.18);
+}
+
+.inventory-title{
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(40,32,22,.85);
+}
+
+/* TABS = ABAS LATERAIS */
+.inventory-tabs{
+  position: relative;
+  z-index: 1;
+  display:flex;
+  gap:0;
+  padding: 8px 12px 10px 56px;
+}
+
+.inventory-tabs .tab{
+  position: relative;
+  padding: 8px 14px 8px 32px;
+
+  background: #efe9dd;
+  border: 1px solid rgba(40,32,22,.25);
+  border-left: none;
+  border-radius: 0 10px 10px 0;
+
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(40,32,22,.75);
+
+  cursor: pointer;
+}
+
+/* ícones nas abas */
+.inventory-tabs .tab::before{
+  position:absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 13px;
+  opacity:.6;
+}
+
+.inventory-tabs .tab[data-inv-tab="clues"]::before{ content:"📎"; }
+.inventory-tabs .tab[data-inv-tab="suspects"]::before{ content:"👤"; }
+.inventory-tabs .tab[data-inv-tab="weapons"]::before{ content:"🔪"; }
+
+/* aba ativa */
+.inventory-tabs .tab.active{
+  background: #faf7f2;
+  color: rgba(26,20,14,.95);
+  border-left-color: transparent;
+}
+
+/* BODY — folhas */
+.inventory-body{
+  position: relative;
+  z-index: 1;
+  padding: 14px 16px 18px 56px;
+  overflow-y: auto;
+  flex: 1 1 auto;
+}
+
+/* FICHAS / DOCUMENTOS */
+.inv-item{
+  background: #ffffff;
+  border: 1px solid rgba(40,32,22,.22);
+  border-radius: 6px;
+  padding: 12px 14px;
+
+  box-shadow:
+    0 8px 16px rgba(0,0,0,.12);
+
+  font-family: "Georgia", serif;
+}
+.inv-item + .inv-item{ margin-top: 10px; }
+
+.inv-item .title{
+  font-weight: 900;
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: rgba(26,20,14,.95);
+}
+.inv-item .meta{
+  font-size: 13px;
+  line-height: 1.45;
+  color: rgba(40,32,22,.70);
+}
+
+/* BADGE como etiqueta de ficha */
+.inv-badge{
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: 4px;
+
+  font-size: 11px;
+  font-weight: 900;
+
+  color: rgba(26,20,14,.90);
+  background: #e8e1d4;
+  border: 1px solid rgba(40,32,22,.30);
+}
+/* =========================
+   TOAST
+========================= */
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:18px;
+  transform: translateX(-50%);
+  background: #DCD4C4C9;
+  border:1px solid var(--line);
+  color:rgba(11,16,34,.92);
+  padding:12px 14px;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  z-index:80;
+  max-width: min(680px, 92vw);
+  font-size:13px;
+  font-family: "Special Elite";
+  font-weight:600;
+}
+@keyframes pop{
+  0% { transform: translateX(-50%) translateY(6px) scale(.98); opacity:0; }
+  100% { transform: translateX(-50%) translateY(0) scale(1); opacity:1; }
+}
+.toast.pop{animation: pop .18s ease;}
+
+/* =========================
+   RESPONSIVO FINO
+========================= */
+@media (max-width: 700px){.nav-card--news .news-photo{height: 210px;}
+  .nav-card--news .news-headline{font-size: 1.65rem;}
+
+  .nav-card{min-height: 320px;}
+  .nav-card--file .file-thumb{height: 180px;}
+
+  .nav-card--report .report-line{flex-direction: column;
+    align-items: flex-start;}
+  .nav-card--report .report-line span{text-align:left;}}
+
+/* =========================================================
+   PATCH — VISUAL “ARQUIVO FÍSICO” (mais claro, zero dashboard)
+   Cole no FINAL do CSS
+========================================================= */
+
+/* 1) Troca do “mundo”: papel/mesa em vez de neon escuro */
+:root{--bg-paper: #e7dcc9;        /* papel base */
+  --bg-paper-2: #d8c8b0;      /* variação */
+  --ink: #1a1712;             /* tinta */
+  --ink-muted: rgba(26,23,18,.72);
+  --paper-line: rgba(26,23,18,.14);
+  --paper-shadow: 0 18px 55px rgba(10,8,6,.22);
+
+  /* reduz sensação “tech” */
+  --accent: #2a6f7b;          /* teal bem mais sóbrio */
+  --line: rgba(26,23,18,.14);
+
+  /* cards/painéis deixam de ser vidro */
+  --panel: rgba(255,255,255,.62);
+  --panel2: rgba(255,255,255,.55);
+  --text: #1a1712;
+  --muted: rgba(26,23,18,.72);}
+
+/* 2) BODY: mesa + papel, claro, quente, físico */
+body{color: var(--text);
+  background:
+    radial-gradient(1200px 680px at 50% -10%, rgba(255,255,255,.65), transparent 55%),
+    radial-gradient(900px 600px at 20% 25%, rgba(126,36,54,.08), transparent 60%),
+    radial-gradient(900px 600px at 80% 30%, rgba(42,111,123,.10), transparent 62%),
+    /* textura papel */
+    repeating-linear-gradient(
+      0deg,
+      rgba(26,23,18,.025),
+      rgba(26,23,18,.025) 1px,
+      transparent 2px,
+      transparent 6px
+    ),
+    linear-gradient(180deg, var(--bg-paper), var(--bg-paper-2));}
+
+/* 3) Topbar deixa de ser “app” escuro */
+.top{background: rgba(255,255,255,.04);
+  border-bottom: 1px solid var(--paper-line);
+  backdrop-filter: blur(8px);}
+.brand-title{color: var(--ink);}
+.brand-sub{color: var(--ink-muted);}
+
+/* some glow */
+.brand-dot, .badge-dot{box-shadow: none;}
+
+/* 4) Grão agora é “papel” (muito sutil) */
+.bg-grain{mix-blend-mode: multiply;
+  opacity: .12;}
+
+/* 5) HUB: nada de “cards SaaS” — vira pasta/arquivo */
+.main-cards{max-width: 1120px;
+  margin: 0 auto;
+  gap: 18px;}
+
+/* Card base: papel com borda e sombra real */
+.nav-card{background:
+    radial-gradient(800px 240px at 20% 0%, rgba(255,255,255,.75), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.55));
+  border: 1px solid var(--paper-line);
+  box-shadow: var(--paper-shadow);
+  border-radius: 18px;
+  color: var(--ink);
+  overflow: hidden;
+  padding: 0;                 /* a estrutura interna manda */}
+
+/* layout vertical: imagem em cima (como “anexo”) */
+.nav-card .card-inner{display: grid;
+  grid-template-columns: 1fr; /* vertical */
+  gap: 0;}
+
+/* thumb no topo (tipo recorte colado) */
+.nav-card .thumb{width: 100%;
+  height: 200px;
+  border-radius: 0;
+  border: 0;
+  background: rgba(0,0,0,.06);
+  box-shadow: none;
+  overflow: hidden;
+  position: relative;}
+.nav-card .thumb img{width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: contrast(1.03) saturate(.95);}
+
+/* “fita” no topo do recorte */
+.nav-card .thumb::after{content:"";
+  position:absolute;
+  top: 10px;
+  left: 14px;
+  width: 64px;
+  height: 18px;
+  transform: rotate(-4deg);
+  border-radius: 4px;
+  background: rgba(255,255,255,.55);
+  border: 1px solid rgba(26,23,18,.10);
+  box-shadow: 0 6px 14px rgba(0,0,0,.10);
+  opacity: .9;}
+
+/* corpo do card = folha */
+.nav-card .card-inner > div:nth-child(2){padding: 14px 16px 16px;}
+
+/* tag vira etiqueta de arquivo */
+.nav-card .tag{font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(26,23,18,.72);
+  margin-bottom: 10px;}
+.nav-card .tag .dot{background: rgba(26,23,18,.50);
+  box-shadow: none;}
+.nav-card .tag.wine .dot{background: rgba(126,36,54,.55);}
+.nav-card .tag.amber .dot{background: rgba(176,123,18,.55);}
+
+.nav-card h3{color: var(--ink);
+  font-weight: 950;
+  font-size: 1.45rem;
+  margin: 0 0 8px;}
+.nav-card .meta{color: var(--ink-muted);
+  font-size: 1.02rem;
+  line-height: 1.55;}
+
+/* carimbo no canto: “impresso” */
+.nav-card .stamp-mini{position: absolute;
+  right: 14px;
+  bottom: 14px;
+  border: 2px solid rgba(126,36,54,.35);
+  color: rgba(126,36,54,.55);
+  background: transparent;
+  padding: 6px 10px;
+  border-radius: 10px;
+  letter-spacing: .16em;
+  font-weight: 900;
+  transform: rotate(4deg);}
+
+/* hover: pega o papel */
+.nav-card:hover{transform: translateY(-2px);
+  border-color: rgba(26,23,18,.22);}
+
+/* 6) Crime: jornal (mais claro) */
+
+.nav-card--crime .thumb{height: 240px;}
+
+
+/* 7) Conclusão: relatório */
+
+
+/* 8) Botões: papel (sem neon) */
+.btn{background: rgba(255,255,255,.55);
+  color: var(--ink);
+  border: 1px solid var(--paper-line);}
+.btn:hover{background: rgba(255,255,255,.70);
+  border-color: rgba(26,23,18,.20);
+  filter: none;}
+.btn.primary{background: rgba(176,123,18,.12);
+  border-color: rgba(176,123,18,.35);}
+
+/* 9) FIX sobreposição */
+.main-cards{display: grid;
+  grid-auto-flow: row;
+  grid-auto-rows: auto;
+  align-items: stretch;}
+.nav-card{position: relative;
+  isolation: isolate;}
+.nav-card *{position: relative; z-index: 1;}
+
+/* =========================================================
+   BACKGROUND — MESA DE ESCRIVANINHA
+========================================================= */
+
+body{color: #1c1a16;
+  background:
+    /* luz do abajur */
+    radial-gradient(
+      800px 500px at 50% -10%,
+      rgba(255,220,160,.35),
+      transparent 65%
+    ),
+    /* vinheta */
+    radial-gradient(
+      1200px 800px at 50% 50%,
+      transparent 60%,
+      rgba(0,0,0,.45) 100%
+    ),
+    /* textura da mesa */
+    url("./assets/ui/desk-wood.png");
+
+  background-size:
+    auto,
+    auto,
+    cover;
+
+  background-attachment: fixed;
+  background-position: center;}
+
+/* cards como objetos sobre a mesa */
+.nav-card{background: #f4ecd8; /* papel */
+  border: 1px solid rgba(40,30,20,.25);
+  box-shadow:
+    0 18px 35px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.6);
+  border-radius: 14px;}
+
+/* pequena rotação irregular (papéis espalhados) */
+.nav-card:nth-child(odd){transform: rotate(-0.4deg);}
+.nav-card:nth-child(even){transform: rotate(0.35deg);}
+
+.nav-card:hover{transform: translateY(-3px) rotate(0deg);}
+
+.main-cards::before{content:"";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      600px 400px at 70% 30%,
+      rgba(0,0,0,.18),
+      transparent 70%
+    );
+  mix-blend-mode: multiply;}
+
+/* =========================================================
+   CAPA: PASTA 100% + BOTÕES SOBRE A IMAGEM
+========================================================= */
+
+.cover-hero--full{position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  min-height: 520px;          /* ajusta o tamanho da “mesa” */
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 26px 90px rgba(0,0,0,.55);}
+
+/* imagem ocupa TUDO */
+.cover-hero--full .cover-bg{position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;          /* preenche sem deformar */
+  transform: scale(1.02);     /* tira borda “seca” */
+  filter: contrast(1.02) saturate(1.02);}
+
+/* camada por cima */
+.cover-hero--full .cover-overlay{position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;        /* centraliza o bloco de texto */
+  padding: 28px;
+  z-index: 2;}
+
+/* tipografia */
+
+
+
+
+.cover-sub2{margin: 0 0 16px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: rgba(255,255,255,.78);}
+
+/* botões dentro da pasta */
+.cover-actions2{display: flex;
+  gap: 16px;
+  margin: 22px 0 14px;
+  flex-wrap: wrap;}
+/* ===== BOTÕES ESTILO CARIMBO ===== */
+
+.cover-actions2 .btn{position: relative;
+  padding: 12px 20px;
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-size: 12px;
+
+  background: transparent;
+  border: 3px solid rgba(0,0,0,.45);
+  color: rgba(0,0,0,.65);
+
+  border-radius: 10px;
+  cursor: pointer;
+
+  transform: rotate(-1.5deg);
+  transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+
+  box-shadow:
+    inset 0 0 0 2px rgba(0,0,0,.06),
+    0 6px 14px rgba(0,0,0,.18);}
+
+/* textura do carimbo */
+.cover-actions2 .btn::after{content:"";
+  position:absolute;
+  inset:-6px;
+  pointer-events:none;
+  background:
+    radial-gradient(2px 2px at 12% 20%, rgba(0,0,0,.25), transparent 60%),
+    radial-gradient(1px 1px at 42% 68%, rgba(0,0,0,.22), transparent 60%),
+    radial-gradient(2px 2px at 78% 36%, rgba(0,0,0,.18), transparent 60%),
+    repeating-linear-gradient(
+      -12deg,
+      rgba(0,0,0,.12),
+      rgba(0,0,0,.12) 1px,
+      transparent 2px,
+      transparent 5px
+    );
+  opacity: .35;
+  border-radius: 12px;
+  mix-blend-mode: multiply;}
+
+/* hover: carimbo “pressionado” */
+.cover-actions2 .btn:hover{transform: rotate(0deg) translateY(1px);
+  opacity: .85;}
+
+/* clique */
+.cover-actions2 .btn:active{transform: rotate(0deg) translateY(2px) scale(.98);}
+.cover-actions2 .btn.primary{border-color: rgba(176,123,18,.75);
+  color: rgba(176,123,18,.85);}
+
+.cover-actions2 .btn:not(.primary):not(.danger){border-color: rgba(0,0,0,.45);
+  color: rgba(0,0,0,.6);}
+
+.cover-actions2 .btn.danger{border-color: rgba(126,36,54,.7);
+  color: rgba(126,36,54,.8);}
+
+/* rodapé discreto */
+.cover-footnote{margin-top: 16px;
+  font-size: 15px;
+  color: rgba(0,0,0,.6);}
+
+/* responsivo */
+@media (max-width: 720px){.cover-hero--full{min-height: 460px;}
+  
+  .cover-glass{width: 100%;}}
+/* =========================================================
+   COVER — CARIMBO HARDCORE (tinta seca + desgaste)
+========================================================= */
+
+/* container principal */
+.cover-glass{padding: 36px 40px;
+  border-radius: 24px;
+
+  /* quase sem fundo: tinta no papel */
+  background: rgba(231,220,201,.14);
+
+  /* borda de carimbo pressionado */
+  border: 4px solid rgba(38,30,22,.42);
+
+  /* pressão irregular (afundado no papel) */
+  box-shadow:
+    inset 0 0 0 2px rgba(38,30,22,.12),
+    inset 0 14px 22px rgba(0,0,0,.16),
+    inset 0 -8px 14px rgba(255,255,255,.30),
+    0 18px 38px rgba(0,0,0,.18);
+
+  transform: rotate(-2deg);
+
+  color: rgba(28,22,16,.92);
+  position: relative;
+  overflow: hidden;}
+
+/* desgaste geral da tinta */
+.cover-glass::before{content:"";
+  position:absolute;
+  inset:-8px;
+  pointer-events:none;
+
+  background:
+    /* falhas pontuais */
+    radial-gradient(3px 3px at 14% 22%, rgba(0,0,0,.22), transparent 60%),
+    radial-gradient(2px 2px at 36% 64%, rgba(0,0,0,.18), transparent 60%),
+    radial-gradient(3px 3px at 72% 18%, rgba(0,0,0,.20), transparent 60%),
+    radial-gradient(2px 2px at 88% 76%, rgba(0,0,0,.16), transparent 60%),
+
+    /* desgaste linear (borracha) */
+    repeating-linear-gradient(
+      -7deg,
+      rgba(0,0,0,.10),
+      rgba(0,0,0,.10) 1px,
+      transparent 2px,
+      transparent 8px
+    );
+
+  opacity:.55;
+  mix-blend-mode: multiply;}
+
+/* halo de pressão (marca circular do carimbo) */
+.cover-glass::after{content:"";
+  position:absolute;
+  inset:-30px;
+  pointer-events:none;
+
+  background: radial-gradient(
+    65% 55% at 50% 50%,
+    rgba(0,0,0,.28),
+    transparent 72%
+  );
+
+  opacity:.32;}
+
+/* garante conteúdo acima */
+.cover-glass > *{position: relative;
+  z-index: 1;}
+
+/* =========================================================
+   TIPOGRAFIA — TINTA CARIMBADA
+========================================================= */
+
+/* kicker / caso */
+.cover-glass .cover-kicker, .cover-glass .kicker, .cover-glass .badge, .cover-glass .tiny:first-child{font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .26em;
+  color: rgba(36,28,18,.72);
+
+  text-shadow:
+    0.8px 0   0 rgba(36,28,18,.28),
+   -0.6px 0.6px 0 rgba(255,255,255,.22);
+
+  filter: contrast(1.1);}
+
+/* TÍTULO — EVIDÊNCIA ZERO (carimbo mestre) */
+.cover-glass h1, .cover-glass .cover-title, .cover-glass .title-stamp{font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: rgba(18,14,10,.94);
+
+  text-shadow:
+    1.4px 0   0 rgba(18,14,10,.32),
+   -1px 0.8px 0 rgba(255,255,255,.26),
+    0 3px 0 rgba(0,0,0,.14);
+
+  /* desgaste da tinta */
+  filter: contrast(1.12) saturate(.92);}
+
+/* subtítulo */
+.cover-glass p{font-weight: 650;
+  color: rgba(44,36,26,.80);
+  letter-spacing: .015em;}
+
+/* rodapé / dica */
+.cover-glass .tiny, .cover-glass .dim{color: rgba(44,36,26,.62);
+  letter-spacing: .03em;}
+
+/* =========================================================
+   BOTÕES — CARIMBOS DE BORRACHA
+========================================================= */
+
+.cover-glass .cover-actions{gap: 16px;}
+
+.cover-glass .btn{background: rgba(231,220,201,.08);
+  border: 4px solid rgba(38,30,22,.48);
+  border-radius: 16px;
+
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  color: rgba(26,20,14,.82);
+
+  box-shadow:
+    inset 0 0 0 2px rgba(38,30,22,.14),
+    inset 0 12px 18px rgba(0,0,0,.14),
+    0 10px 22px rgba(0,0,0,.16);
+
+  transform: rotate(-0.4deg);}
+
+/* cada botão com “erro humano” */
+.cover-glass .btn:nth-child(2){transform: rotate(0.35deg);}
+.cover-glass .btn:nth-child(3){transform: rotate(-0.2deg);}
+
+.cover-glass .btn:hover{filter: contrast(1.08);
+  border-color: rgba(38,30,22,.65);}
+
+.cover-glass .btn:active{transform: translateY(2px) rotate(0deg);
+  box-shadow:
+    inset 0 0 0 2px rgba(38,30,22,.18),
+    inset 0 16px 22px rgba(0,0,0,.18);}
+
+/* variações de tinta */
+.cover-glass .btn.primary{border-color: rgba(176,123,18,.65);
+  color: rgba(92,64,10,.82);}
+
+.cover-glass .btn.danger{border-color: rgba(126,36,54,.65);
+  color: rgba(88,22,36,.84);}
+
+/* =========================================================
+   DESGASTE DE FONTE — CARIMBO REAL (EVIDÊNCIA ZERO)
+========================================================= */
+
+.cover-glass .cover-title, .cover-glass .title-stamp, .cover-glass h1{position: relative;
+
+  /* base da tinta */
+  color: rgba(18,14,10,.100);
+  font-weight: 950;
+  font-size: 70px;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+
+  /* tinta irregular */
+  text-shadow:
+    1.4px 0   0 rgba(18,14,10,.38),
+   -1.2px .8px 0 rgba(255,255,255,.25),
+    .6px .6px 0 rgba(0,0,0,.22),
+   -.4px .4px 0 rgba(0,0,0,.18),
+    0 2px 0 rgba(0,0,0,.18);
+
+  /* “borracha velha” */
+  filter:
+    contrast(1.18)
+    saturate(.85)
+    blur(.15px);}
+
+/* desgaste pontual da tinta (falhas) */
+.cover-glass .cover-title::before{content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: rgba(18,14,10,.55);
+  pointer-events: none;
+
+  transform: translate(1px, -1px);
+
+  mask-image:
+    radial-gradient(3px 3px at 12% 28%, transparent 40%, black 60%),
+    radial-gradient(2px 2px at 34% 62%, transparent 45%, black 65%),
+    radial-gradient(3px 3px at 58% 18%, transparent 40%, black 60%),
+    radial-gradient(2px 2px at 82% 74%, transparent 45%, black 65%),
+    repeating-linear-gradient(
+      -7deg,
+      black,
+      black 1px,
+      transparent 2px,
+      transparent 7px
+    );
+
+  -webkit-mask-image: inherit;
+  opacity: .55;}
+
+/* falha horizontal clássica de carimbo */
+.cover-glass .cover-title::after{content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+
+  background:
+    repeating-linear-gradient(
+      -6deg,
+      rgba(0,0,0,.22),
+      rgba(0,0,0,.22) 1px,
+      transparent 2px,
+      transparent 9px
+    );
+
+  mix-blend-mode: multiply;
+  opacity:.35;}
+
+/* =========================================================
+   POLISH HUB — mesa + jornal + pastas (FINAL DO CSS)
+========================================================= */
+
+/* 1) Respiro do hub (evita cards colados e cortando no fim) */
+.app{padding-bottom: 110px; /* dá espaço pro final da grade */
+  margin-top: 10px;}
+
+.hub-layout{padding-top: 16px;}
+
+.main-cards{max-width: 1080px;
+  margin: 0 auto;
+  padding: 18px 18px 0;
+  gap: 18px;
+  align-items: start;}
+
+/* 2) CARD JORNAL — mais “recorte” e menos bloco cinza */
+.nav-card--news{grid-column: 1 / -1;
+  border-radius: 26px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,.12);
+  background: rgba(231,220,201,.10);
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.30);}
+
+/* foto do jornal: menor e com textura/vinheta */
+.nav-card--news .news-photo{
+  position: relative;
+
+  /* ocupa tudo, sem parecer banner fino */
+  min-height: clamp(300px, 32vw, 420px);
+
+  background-image:
+    radial-gradient(1200px 320px at 30% 15%, rgba(255,255,255,.22), transparent 60%),
+    linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.32)),
+    url("./assets/ui/news-crime.png");
+
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  border-bottom: 1px solid rgba(0,0,0,.18);
+}
+  
+
+/* vinheta por cima da foto (cara de jornal) */
+.nav-card--news .news-photo::after{content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(800px 260px at 50% 30%, transparent 45%, rgba(0,0,0,.28) 100%);
+  opacity:.55;}
+
+/* tarja “edição especial” mais carimbo */
+.nav-card--news .news-strip{background: rgba(20,16,12,.32);
+  border: 2px solid rgba(20,16,12,.40);
+  color: rgba(255,255,255,.90);
+  letter-spacing: .22em;
+  font-weight: 900;
+  padding: 9px 14px;
+  transform: rotate(-2deg);
+  box-shadow: 0 10px 24px rgba(0,0,0,.20);}
+
+/* corpo do jornal: mais papel, menos vidro */
+.nav-card--news .news-body{background:
+    radial-gradient(900px 260px at 18% 0%, rgba(255,255,255,.20), transparent 62%),
+    radial-gradient(700px 240px at 70% 40%, rgba(0,0,0,.08), transparent 70%),
+    rgba(231,220,201,.22);
+  border-top: 1px solid rgba(255,255,255,.22);
+  padding: 18px 22px 20px;
+  position: relative;}
+
+/* grão do papel no corpo */
+.nav-card--news .news-body::before{content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(2px 2px at 12% 18%, rgba(0,0,0,.07) 0, transparent 60%),
+    radial-gradient(2px 2px at 72% 78%, rgba(0,0,0,.06) 0, transparent 60%),
+    repeating-linear-gradient(
+      -7deg,
+      rgba(0,0,0,.05),
+      rgba(0,0,0,.05) 1px,
+      transparent 2px,
+      transparent 9px
+    );
+  opacity:.35;
+  mix-blend-mode: multiply;}
+
+/* meta do jornal com “etiquetas” */
+.nav-card--news .news-meta{color: rgba(30,24,16,.78);
+  font-weight: 800;
+  letter-spacing: .04em;}
+
+.nav-card--news .paper-tag{background: rgba(20,16,12,.16);
+  border: 1px solid rgba(20,16,12,.18);
+  color: rgba(20,16,12,.72);}
+
+/* headline: mais editorial */
+.nav-card--news .news-headline{color: rgba(18,14,10,.92);
+  font-size: clamp(1.6rem, 2.2vw, 2.25rem);
+  letter-spacing: -.01em;
+  line-height: 1.06;
+  margin-bottom: 10px;}
+
+/* sub: mais legível */
+.nav-card--news .news-sub{
+  color: rgba(35,28,18,.78);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+/* botão ABRIR: vira carimbo */
+.nav-card--news .stamp-mini{background: rgba(126,36,54,.10);
+  border: 2px solid rgba(126,36,54,.35);
+  color: rgba(126,36,54,.70);
+  letter-spacing: .22em;
+  font-weight: 950;
+  padding: 8px 14px;
+  transform: rotate(2deg);
+  box-shadow: 0 10px 18px rgba(0,0,0,.16);}
+
+/* 3) CARDS “PASTAS” — mais altos, menos cara de grid de app */
+.nav-card--file{border-radius: 18px;
+  background: rgba(231,220,201,.18);
+  border: 1px solid rgba(0,0,0,.14);
+  box-shadow: 0 18px 40px rgba(0,0,0,.18);
+  overflow: hidden;
+  min-height: 210px; /* ↑ dá presença */}
+
+.nav-card--file .thumb{height: 110px; /* imagem no topo */
+  width: 100%;
+  border-radius: 0;
+  border: 0;
+  box-shadow: none;
+  background: rgba(0,0,0,.08);}
+
+.nav-card--file .thumb img{width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display:block;
+  filter: contrast(1.03) saturate(.92);}
+
+/* conteúdo do card: papel */
+.nav-card--file .content, .nav-card--file .card-inner{padding: 14px 14px 16px;}
+
+/* “etiqueta” estilo pastinha */
+.nav-card--file .kicker, .nav-card .tag{display:inline-flex;
+  align-items:center;
+  gap: 8px;
+  background: rgba(20,16,12,.10);
+  border: 1px solid rgba(20,16,12,.14);
+  color: rgba(20,16,12,.70);
+  padding: 6px 10px;
+  border-radius: 999px;
+  letter-spacing: .18em;
+  font-weight: 950;
+  text-transform: uppercase;}
+
+/* título dos cards: menos “dashboard” */
+.nav-card--file h3{color: rgba(18,14,10,.92);
+  font-weight: 950;
+  letter-spacing: .01em;}
+
+.nav-card--file .meta{color: rgba(35,28,18,.74);}
+
+/* 4) Top actions (Inventário / Voltar) no mesmo material */
+.top{background: rgba(231,220,201,.10);
+  border-bottom: 1px solid rgba(0,0,0,.10);
+  backdrop-filter: blur(10px);}
+
+.btn{background: rgba(231,220,201,.18);
+  border: 2px solid rgba(40,32,22,.18);
+  color: rgba(20,16,12,.78);
+  font-weight: 800;
+  letter-spacing: .08em;}
+
+.btn:hover{background: rgba(231,220,201,.26);
+  border-color: rgba(40,32,22,.28);}
+
+/* 5) Mobile: evita “cortar” cards e melhora leitura */
+@media (max-width: 700px){.main-cards{padding: 12px;}
+  .nav-card--file{min-height: 230px;}
+  .nav-card--news .news-body{padding: 16px;}}
+
+/* =========================================================
+   AAA — PAPEL KRAFT + PASTA LEVANTADA (FINAL DO CSS)
+========================================================= */
+
+/* tokens rápidos (ajuste fino sem caçar no CSS) */
+:root{--kraft: rgba(231,220,201,.38);     /* papel */
+  --kraft-2: rgba(231,220,201,.22);   /* papel secundário */
+  --ink: rgba(26,20,14,.92);          /* tinta */
+  --ink-2: rgba(44,36,26,.78);        /* tinta fraca */
+  --edge: rgba(40,32,22,.22);         /* borda/pasta */
+  --shadow-lift: 0 26px 65px rgba(0,0,0,.22);}
+
+/* =========================================================
+   1) CARD ARQUIVO (nav-card--file) = PASTA FÍSICA
+========================================================= */
+.nav-card--file{position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid var(--edge);
+  background: var(--kraft);
+  box-shadow:
+    var(--shadow-lift),
+    inset 0 1px 0 rgba(255,255,255,.35);
+  transform: rotate(-0.25deg);
+  transition: transform .14s ease, box-shadow .18s ease, border-color .18s ease;
+  isolation: isolate;}
+
+/* “pasta levantada”: segunda camada por baixo */
+.nav-card--file::after{content:"";
+  position:absolute;
+  inset: 10px 10px -10px 10px;
+  border-radius: 18px;
+  background: rgba(0,0,0,.06);
+  filter: blur(0.2px);
+  z-index: 0;}
+
+/* textura do kraft + grão + sujeirinha */
+.nav-card--file::before{content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    /* iluminação */
+    radial-gradient(900px 260px at 18% 0%, rgba(255,255,255,.24), transparent 62%),
+    radial-gradient(800px 240px at 70% 45%, rgba(0,0,0,.10), transparent 70%),
+
+    /* grão */
+    radial-gradient(2px 2px at 12% 18%, rgba(0,0,0,.07) 0, transparent 60%),
+    radial-gradient(2px 2px at 72% 78%, rgba(0,0,0,.06) 0, transparent 60%),
+    radial-gradient(1px 1px at 42% 52%, rgba(0,0,0,.05) 0, transparent 60%),
+
+    /* desgaste “fibra” */
+    repeating-linear-gradient(
+      -8deg,
+      rgba(0,0,0,.05),
+      rgba(0,0,0,.05) 1px,
+      transparent 2px,
+      transparent 10px
+    );
+  opacity: .42;
+  mix-blend-mode: multiply;
+  z-index: 1;}
+
+/* hover: pega o dossiê da mesa */
+.nav-card--file:hover{transform: translateY(-3px) rotate(0deg);
+  box-shadow:
+    0 34px 85px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.38);
+  border-color: rgba(40,32,22,.30);}
+
+/* =========================================================
+   1.1) ABA DE PASTA (folder tab)
+   (cria aquela “lingueta” no topo)
+========================================================= */
+.nav-card--file .folder-tab{position: absolute;
+  top: -10px;
+  left: 18px;
+  width: 118px;
+  height: 28px;
+  border-radius: 12px 12px 10px 10px;
+  background: rgba(231,220,201,.70);
+  border: 1px solid rgba(40,32,22,.18);
+  box-shadow: 0 10px 16px rgba(0,0,0,.08);
+  z-index: 3;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size: 10.5px;
+  letter-spacing: .22em;
+  font-weight: 950;
+  text-transform: uppercase;
+  color: rgba(26,20,14,.72);
+  transform: rotate(-1.5deg);}
+
+/* =========================================================
+   1.2) THUMB como “foto anexada”
+========================================================= */
+.nav-card--file .thumb{position: relative;
+  height: 120px;
+  width: 100%;
+  background: rgba(0,0,0,.06);
+  border: 0;
+  z-index: 2;}
+
+/* “moldura” da foto */
+.nav-card--file .thumb::before{content:"";
+  position:absolute;
+  inset: 10px 12px 12px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,.14);
+  background: rgba(255,255,255,.18);
+  box-shadow:
+    0 16px 26px rgba(0,0,0,.16),
+    inset 0 1px 0 rgba(255,255,255,.22);
+  z-index: 1;}
+
+/* clip metálico no topo da foto */
+.nav-card--file .thumb::after{content:"";
+  position:absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 34px;
+  height: 14px;
+  border-radius: 0 0 10px 10px;
+  background: linear-gradient(180deg, rgba(255,255,255,.65), rgba(120,120,120,.25));
+  border: 1px solid rgba(0,0,0,.12);
+  box-shadow: 0 10px 14px rgba(0,0,0,.14);
+  opacity: .75;
+  z-index: 3;}
+
+.nav-card--file .thumb img{position:absolute;
+  inset: 12px 14px 14px 14px;
+  width: calc(100% - 28px);
+  height: calc(100% - 26px);
+  object-fit: cover;
+  border-radius: 12px;
+  filter: contrast(1.05) saturate(.92);
+  z-index: 2;}
+
+/* =========================================================
+   1.3) CONTEÚDO (texto) vira “tinta em papel”
+========================================================= */
+.nav-card--file .content, .nav-card--file .card-inner{position: relative;
+  z-index: 2;
+  padding: 14px 16px 16px;}
+
+.nav-card--file h3{color: var(--ink);
+  font-weight: 950;
+  letter-spacing: .01em;
+  margin: 10px 0 6px;}
+
+.nav-card--file .meta{color: var(--ink-2);
+  line-height: 1.45;}
+
+/* carimbo no canto (ABRIR/ROTA/COLETA) */
+.nav-card--file .stamp-mini{position: absolute;
+  right: 14px;
+  bottom: 12px;
+  z-index: 3;
+  background: rgba(0,0,0,.00);
+  border: 2px solid rgba(40,32,22,.34);
+  color: rgba(40,32,22,.70);
+  font-weight: 950;
+  letter-spacing: .22em;
+  padding: 7px 12px;
+  border-radius: 999px;
+  transform: rotate(2deg);
+  box-shadow: 0 10px 18px rgba(0,0,0,.10);}
+
+/* =========================================================
+   2) CARD JORNAL (nav-card--news) — papel real + dobra
+========================================================= */
+.nav-card--news{position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  border: 1px solid rgba(40,32,22,.18);
+  background: rgba(231,220,201,.18);
+  box-shadow: 0 30px 90px rgba(0,0,0,.28);
+  isolation: isolate;}
+
+/* dobra/pressão do jornal */
+.nav-card--news::before{content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,
+      rgba(0,0,0,.10),
+      transparent 18%,
+      transparent 82%,
+      rgba(0,0,0,.10)
+    ),
+    repeating-linear-gradient(
+      -7deg,
+      rgba(0,0,0,.05),
+      rgba(0,0,0,.05) 1px,
+      transparent 2px,
+      transparent 10px
+    );
+  opacity:.30;
+  mix-blend-mode: multiply;
+  z-index: 1;}
+
+.nav-card--news .news-body, .nav-card--news .news-photo{position: relative;
+  z-index: 2;}
+
+/* =========================================================
+   3) “Etiqueta” (JORNAL / PERFIL / OBJETOS) menos UI
+========================================================= */
+.nav-card .tag, .nav-card--file .kicker, .nav-card--news .paper-tag{background: rgba(20,16,12,.10);
+  border: 1px solid rgba(20,16,12,.14);
+  color: rgba(20,16,12,.72);
+  font-weight: 950;
+  letter-spacing: .20em;}
+
+/* =========================================================
+   4) Ajustes mobile para não ficar apertado
+========================================================= */
+@media (max-width: 700px){.nav-card--file{transform: none;}
+  .nav-card--file .thumb{height: 132px;}
+  .nav-card--file .folder-tab{left: 14px;}}
+
+/* =========================================================
+   CONCLUSÃO — RELATÓRIO DATILOGRAFADO
+========================================================= */
+
+/* card base */
+.nav-card--report{background: rgba(244,238,224,.78);
+  border: 2px solid rgba(60,48,36,.35);
+  box-shadow:
+    0 26px 65px rgba(0,0,0,.25),
+    inset 0 1px 0 rgba(255,255,255,.6);
+  transform: rotate(-0.15deg);}
+
+/* cabeçalho */
+.nav-card--report .report-head{background: rgba(220,212,196,.85);
+  border: 1px solid rgba(60,48,36,.25);
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,.08);}
+
+/* kicker */
+.nav-card--report .report-kicker{font-family: "Courier Prime", monospace;
+  letter-spacing: .28em;
+  font-size: 11px;
+  color: rgba(60,48,36,.65);}
+
+/* TÍTULO — máquina de escrever */
+.nav-card--report h3{font-family: "Special Elite", "Courier Prime", monospace;
+  font-size: 1.9rem;
+  letter-spacing: .04em;
+  color: rgba(28,22,16,.92);
+  text-shadow:
+    0.5px 0 rgba(0,0,0,.12),
+    -0.3px 0 rgba(0,0,0,.08);}
+
+/* subtítulo */
+.nav-card--report .meta{font-family: "Courier Prime", monospace;
+  font-size: 14px;
+  color: rgba(60,48,36,.75);}
+
+/* corpo do relatório */
+.nav-card--report .report-body{font-family: "Courier Prime", monospace;
+  letter-spacing: .02em;}
+
+/* linhas (campo → valor) */
+.nav-card--report .report-line{background: rgba(255,255,255,.35);
+  border: 1px dashed rgba(60,48,36,.35);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.03);}
+
+/* rótulo */
+.nav-card--report .report-line b{font-weight: 700;
+  color: rgba(40,32,22,.85);}
+
+/* valor digitado */
+.nav-card--report .report-line span{font-weight: 400;
+  color: rgba(60,48,36,.75);
+  text-shadow: 0.3px 0 rgba(0,0,0,.08);
+  margin-bottom: 30px;}
+
+/* desgaste sutil de tinta */
+.nav-card--report::before{content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(2px 2px at 22% 34%, rgba(0,0,0,.18), transparent 60%),
+    radial-gradient(2px 2px at 62% 58%, rgba(0,0,0,.14), transparent 60%),
+    radial-gradient(1px 1px at 78% 24%, rgba(0,0,0,.12), transparent 60%);
+  opacity:.25;
+  mix-blend-mode:multiply;}
+
+/* botão GERAR como carimbo */
+.nav-card--report .stamp-mini{font-family: "Courier Prime", monospace;
+  letter-spacing: .22em;
+  font-weight: 700;
+  border: 2px solid rgba(120,40,40,.55);
+  color: rgba(120,40,40,.75);
+  background: rgba(255,255,255,.25);
+  transform: rotate(2deg);
+  box-shadow: 0 10px 18px rgba(0,0,0,.15);
+  margin-top: 20px;}
+
+/* =========================================================
+   MODAL — ARQUIVO FÍSICO (pasta/papel) + INNER DO PROFILE
+   Cola no FINAL do style.css
+========================================================= */
+
+/* fundo do modal mais suave (não HBO dark total) */
+.modal-backdrop{background: rgba(0,0,0,0.42);
+  backdrop-filter: blur(2px);}
+
+/* cartão do modal vira “folha/pasta” */
+.modal-card{background: rgba(244,238,224,.92);
+  border: 2px solid rgba(60,48,36,.35);
+  border-radius: 22px;
+  box-shadow: 0 30px 90px rgba(0,0,0,.35);
+  overflow: hidden;}
+
+/* header como tarja do arquivo */
+.modal-head{background: rgba(220,212,196,.88);
+  border-bottom: 1px solid rgba(60,48,36,.22);
+  padding: 12px 14px;}
+
+/* título do modal com cara de carimbo/arquivo */
+.modal-title{color: rgba(35,28,20,.88);
+  font-family: "Courier Prime", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: .22em;
+  font-weight: 800;
+  font-size: 18px;
+  text-transform: uppercase;}
+
+/* botão fechar mais “carimbo” */
+#btnCloseModal.btn.ghost{border: 2px solid rgba(60,48,36,.25);
+  background: rgba(255,255,255,.25);
+  color: rgba(35,28,20,.80);}
+#btnCloseModal.btn.ghost:hover{border-color: rgba(60,48,36,.45);
+  background: rgba(255,255,255,.45);}
+
+/* corpo do modal em papel */
+.modal-body{background:
+    radial-gradient(900px 260px at 20% 0%, rgba(255,255,255,.35), transparent 60%),
+    rgba(244,238,224,.92);
+  color: rgba(35,28,20,.88);}
+
+/* ===== PROFILE INNER (Vítima etc) ===== */
+
+/* container principal do profile */
+.profile{display: grid;
+  grid-template-columns: 240px 1fr; /* foto | texto */
+  gap: 20px;
+  align-items: start;}
+
+/* garante que a imagem não estique */
+.profile-media{position: relative;}
+
+/* imagem como “anexo” */
+.profile-img{width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  display: block;}
+
+/* coluna de texto */
+
+
+títulos com cara de ficha
+.profile-name{margin: 0;}
+
+/* blocos de texto (quem é, relação, notas…) */
+.profile-block{margin-top: 6px;}
+
+/* =========================
+   RESPONSIVO — empilha no mobile
+========================= */
+@media (max-width: 720px){.profile{grid-template-columns: 1fr;}
+
+  .profile-media{max-width: 260px;
+    margin: 0 auto;}}
+
+/* se você estiver usando imagem grande tipo banner em cima do modal, controla aqui */
+.modal-body img{width: 100%;
+  height: 100%;
+  object-fit: cover;}
+
+/* textos do profile em “relatório” */
+.profile-kicker{font-family: "Courier Prime", ui-monospace, monospace;
+  letter-spacing: .28em;
+  color: rgba(60,48,36,.62);}
+.profile-name{font-family: "Special Elite", "Courier Prime", ui-monospace, monospace;
+  color: rgba(28,22,16,.92);
+  letter-spacing: .02em;
+  margin: 10px;}
+.profile-summary{font-family: "Courier Prime", ui-monospace, monospace;
+  color: rgba(60,48,36,.78);}
+
+.profile-block{padding: 14px 16px;               
+  margin-top: 14px;                  
+  border-radius: 16px;
+  border: 1px dashed rgba(60,48,36,.28);
+  background: rgba(255,255,255,.45); 
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.65),
+    0 10px 24px rgba(0,0,0,.10);
+  font-family: "Courier Prime", ui-monospace, monospace;
+  color: rgba(60,48,36,.78);}
+
+
+.profile-block-title{display: inline-block;
+  margin-bottom: 10px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  letter-spacing: .22em;}
+
+.profile-notes{margin: 0;
+  padding-left: 18px;}
+.profile-notes li{margin: 8px 0;      
+  line-height: 1.55;}
+
+.profile-actions{margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(60,48,36,.18); 
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;}
+
+.profile-actions .btn{padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.35);
+  border: 2px solid rgba(60,48,36,.22);}
+.profile-actions .btn:hover{background: rgba(255,255,255,.55);
+  border-color: rgba(60,48,36,.35);}
+
+/* responsive */
+@media (max-width: 720px){.profile{grid-template-columns: 1fr;}
+  .modal-body img{max-height: 260px;}}
+
+/* =========================
+   HOTSPOT — CÍRCULO TRANSPARENTE (ALVO)
+   Cole no FINAL do style.css
+========================= */
+.scene-image-wrap{
+  position: relative;
+  overflow: hidden; /* se tiver zoom */
+}
+
+/* se quiser zoom, aplica no wrap inteiro */
+.scene-image-wrap.zoomed{
+  transform: scale(1.02);
+  transform-origin: center;
+}
+/* ===== Crime Scene Interactive (hotspots) ===== */
+.scene-wrap{position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.02);}
+
+.scene-img{
+  width: 100%;
+  height: auto;
+  display: block;}
+
+.hotspot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(0,0,0,0.20);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+
+  /* animação sutil “investigação” */
+  box-shadow:
+    0 0 0 0 rgba(125, 211, 252, 0.28),
+    0 10px 30px rgba(0,0,0,0.35);
+  transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+}
+
+.hotspot:hover {
+  background: rgba(0,0,0,0.32);
+  border-color: rgba(125, 211, 252, 0.45);
+  transform: translate(-50%, -50%) scale(1.04);
+}
+
+.hotspot:active {
+  transform: translate(-50%, -50%) scale(0.98);
+}
+
+.hotspot::after {
+  content: attr(data-label);
+  font-weight: 900;
+  font-size: 14px;
+  color: rgba(230,234,242,0.95);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.55);
+}
+
+/* pulse ring */
+.hotspot::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 999px;
+  border: 1px solid rgba(125, 211, 252, 0.30);
+  opacity: 0.0;
+  animation: hotspotPulse 1.8s infinite ease-in-out;
+}
+
+@keyframes hotspotPulse {
+  0%   { transform: scale(0.92); opacity: 0.0; }
+  35%  { opacity: 0.55; }
+  100% { transform: scale(1.18); opacity: 0.0; }
+}
+
+/* bloco de texto pericial no modal */
+.forensic-block{margin-top: 12px;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.02);}
+
+.forensic-kicker{font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.02);
+  margin-bottom: 8px;}
+
+.forensic-title{font-weight: 900;
+  margin-bottom: 8px;}
+
+.forensic-meta{font-size: 13px;
+  line-height: 1.55;
+}
+
+/* =========================================================
+   DESKTOP WIDE — FICHA DE INVESTIGAÇÃO (≥1200px)
+========================================================= */
+@media (min-width: 1200px){/* ---------- MODAL ---------- */
+  .modal-card{width: min(980px, 92vw);   /* mais largo */
+    max-height: calc(100vh - 60px);}
+
+  .modal-body{padding: 24px 28px;}
+
+  /* ---------- PROFILE GRID ---------- */
+  .profile{grid-template-columns: 280px 1fr; /* foto maior */
+    gap: 26px;
+    align-items: start;}
+
+  /* ---------- FOTO ---------- */
+  .profile-img{max-width: 280px;
+    border-radius: 18px;}
+
+  /* ---------- TEXTO ---------- */
+  .profile-info{max-width: 640px; /* evita linha longa demais */}
+
+  .profile-name{font-size: 1.6rem;
+    margin-bottom: 6px;}
+
+  .profile-summary{font-size: 15.5px;
+    line-height: 1.65;
+    margin-bottom: 14px;}
+
+  /* ---------- BLOCOS (QUEM É / RELAÇÃO / NOTAS) ---------- */
+  .profile-block{padding: 18px 20px;
+    margin-top: 16px;
+    border-radius: 18px;}
+
+  .profile-block-title{margin-bottom: 12px;
+    font-size: 12px;}
+
+  .profile-notes li{margin: 10px 0;
+    font-size: 15px;}
+
+  /* ---------- RODAPÉ (BOTÕES) ---------- */
+  .profile-actions{margin-top: 22px;
+    padding-top: 18px;
+    gap: 14px;}
+
+  .profile-actions .btn{padding: 12px 18px;
+    font-size: 13px;
+    letter-spacing: .14em;}}
+
+/* =========================================================
+   MODAL — LAUDO DE AUTÓPSIA (AAA)
+   Cole no FINAL do style.css
+========================================================= */
+
+.conclu2{
+  color: rgba(35,28,20,.88);
+}
+
+.conclu2-head{
+  padding: 10px 4px 12px;
+  margin-bottom: 10px;
+}
+
+.conclu2-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(60,48,36,.22);
+  background: rgba(255,255,255,.25);
+  font-weight: 900;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+.conclu2-badge .dot{
+  width:8px;height:8px;border-radius:50%;
+  background: rgba(120,40,40,.55);
+}
+
+.conclu2-title{
+  font-family: "Special Elite","Courier Prime", ui-monospace, monospace;
+  font-size: 22px;
+  margin-top: 10px;
+  letter-spacing: .02em;
+}
+
+.conclu2-sub{
+  margin-top: 6px;
+  font-family: "Courier Prime", ui-monospace, monospace;
+  color: rgba(60,48,36,.72);
+  font-size: 14px;
+}
+
+.conclu2-progress{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top: 10px;
+}
+
+.step-pill{
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(60,48,36,.18);
+  background: rgba(255,255,255,.22);
+  font-size: 12px;
+  letter-spacing: .06em;
+  opacity: .75;
+}
+.step-pill.active{
+  opacity: 1;
+  border-color: rgba(176,123,18,.55);
+  background: rgba(176,123,18,.12);
+  font-weight: 900;
+}
+.step-pill.done{
+  opacity: .9;
+}
+
+.conclu2-grid{
+  display:grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 16px;
+  align-items:start;
+}
+
+@media (max-width: 860px){
+  .conclu2-grid{ grid-template-columns: 1fr; }
+}
+
+.step-panel{
+  border: 1px dashed rgba(60,48,36,.28);
+  background: rgba(255,255,255,.32);
+  border-radius: 18px;
+  padding: 14px 14px 12px;
+  box-shadow: 0 10px 22px rgba(0,0,0,.06);
+}
+
+.step-kicker{
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(60,48,36,.65);
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+.step-q{
+  font-family: "Special Elite","Courier Prime", ui-monospace, monospace;
+  margin: 0 0 6px;
+  font-size: 20px;
+}
+
+.step-hint{
+  margin: 0 0 12px;
+  color: rgba(60,48,36,.74);
+  font-family: "Courier Prime", ui-monospace, monospace;
+  font-size: 14px;
+}
+
+.choice .input{
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(60,48,36,.22);
+  background: rgba(255,255,255,.45);
+}
+
+.step-actions{
+  display:flex;
+  gap:10px;
+  justify-content:flex-end;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.step-topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin: 6px 0 10px;
+}
+
+/* LAUDO (lado direito) */
+.laudo-mini{
+  border-radius: 18px;
+  border: 2px solid rgba(60,48,36,.22);
+  background: rgba(220,212,196,.55);
+  box-shadow: 0 14px 26px rgba(0,0,0,.08);
+  overflow:hidden;
+  position: sticky;
+  top: 8px;
+}
+
+.laudo-mini-head{
+  padding: 12px 14px;
+  background: rgba(220,212,196,.78);
+  border-bottom: 1px solid rgba(60,48,36,.18);
+}
+
+.laudo-mini-kicker{
+  font-size: 11px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: rgba(60,48,36,.65);
+  font-weight: 900;
+}
+
+.laudo-mini-title{
+  margin-top: 6px;
+  font-family: "Special Elite","Courier Prime", ui-monospace, monospace;
+  letter-spacing: .06em;
+  color: rgba(28,22,16,.92);
+}
+
+.laudo-mini-body{
+  padding: 12px 14px 14px;
+  background: rgba(244,238,224,.72);
+}
+
+.laudo-line{
+  display:flex;
+  justify-content:space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.35);
+  border: 1px dashed rgba(60,48,36,.28);
+  margin-top: 10px;
+}
+
+.laudo-line b{
+  color: rgba(40,32,22,.88);
+  font-weight: 900;
+}
+
+.laudo-line span{
+  color: rgba(60,48,36,.75);
+  text-align:right;
+}
+
+.laudo-hr{
+  height: 1px;
+  background: rgba(60,48,36,.18);
+  margin: 12px 0;
+}
+
+.laudo-mini-note{
+  color: rgba(60,48,36,.76);
+  font-family: "Courier Prime", ui-monospace, monospace;
+  line-height: 1.5;
+}
+
+.review-box{
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(60,48,36,.18);
+  background: rgba(255,255,255,.28);
+}
+
+/* =========================
+   FINAL RARO — selo discreto no HUB (Crime)
+========================= */
+
+.rare-stamp{display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  user-select: none;
+
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.82);}
+
+.rare-stamp .dot{width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.28);}
+
+/* animação super sutil (não “grita”) */
+@keyframes rarePulse {
+  0%   { transform: scale(1); opacity: 0.75; box-shadow: 0 0 0 0 rgba(255,255,255,0.22); }
+  55%  { transform: scale(1.03); opacity: 1; box-shadow: 0 0 0 10px rgba(255,255,255,0.0); }
+  100% { transform: scale(1); opacity: 0.75; box-shadow: 0 0 0 0 rgba(255,255,255,0.0); }
+}
+
+.nav-card--news.rare-variant .rare-stamp .dot{animation: rarePulse 2.2s ease-in-out infinite;}
+
+/* posição do selo em cima da foto do jornal */
+.nav-card--news .rare-stamp-wrap{position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;}
+
+/* =========================
+   HOTSPOT INVISÍVEL (clicável)
+========================= */
+
+.hotspot{
+  opacity: 1;                 /* volta a aparecer */
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+
+  border: 1px solid rgba(0,0,0,.18);
+  background: rgba(255,255,255,.10); /* discreto em papel */
+  cursor: zoom-in;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.18),
+    0 0 0 0 rgba(176,123,18,.22);
+
+  transition: transform .12s ease, background .12s ease, border-color .12s ease;
+}
+
+.hotspot:hover{
+  background: rgba(255,255,255,.18);
+  border-color: rgba(176,123,18,.45);
+  transform: translate(-50%, -50%) scale(1.04);
+}
+
+/* não mostrar label dentro */
+.hotspot::after{
+  content: "";
+}
+
+/* anel pulsando */
+.hotspot::before{
+  content:"";
+  position:absolute;
+  inset: -7px;
+  border-radius: 999px;
+  border: 1px solid rgba(176,123,18,.35);
+  opacity: 0;
+  animation: hotspotPulse 1.8s infinite ease-in-out;
+}
+
+/* mantém seu keyframes (se já existir) */
+@keyframes hotspotPulse{
+  0%   { transform: scale(.92); opacity: 0; }
+  35%  { opacity: .55; }
+  100% { transform: scale(1.18); opacity: 0; }
+}
+/* não renderiza label/pulse */
+.hotspot::before, .hotspot::after{content: none !important;}
+
+/* acessibilidade: se navegar por teclado, aparece um contorno só no foco */
+.hotspot:focus-visible{opacity: 1;
+  background: rgba(0,0,0,0.12);
+  border: 1px dashed rgba(0,0,0,0.35);
+  border-radius: 999px;}
+
+body.debug-hotspots .hotspot{opacity: 1;
+  background: rgba(255, 210, 0, 0.20);
+  border: 2px solid rgba(180, 120, 0, 0.55);
+  border-radius: 999px;}
+
+
+/* =========================
+   STEP 3 — ARMAS (somente)
+   deixa “ficha” limpa e legível
+========================= */
+
+.conclu2 #weaponsChecklist{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* linha clicável */
+.conclu2 #weaponsChecklist .pick-row{
+  display: block;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+
+/* esconde o checkbox nativo */
+.conclu2 #weaponsChecklist .pick-row input[type="checkbox"]{
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* card/ficha */
+.conclu2 #weaponsChecklist .pick-card{
+  display: block;
+  position: relative;
+
+  padding: 12px 12px 12px 46px;
+  border-radius: 14px;
+
+  background: rgba(255,255,255,.70);
+  border: 1px solid rgba(40,32,22,.18);
+
+  box-shadow:
+    0 10px 22px rgba(0,0,0,.10),
+    inset 0 1px 0 rgba(255,255,255,.70);
+
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+
+/* “marcador” tipo formulário (barra lateral) */
+.conclu2 #weaponsChecklist .pick-card::before{
+  content:"";
+  position:absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 8px;
+  border-radius: 0 10px 10px 0;
+  background: rgba(40,32,22,.10);
+}
+
+/* checkbox desenhado */
+.conclu2 #weaponsChecklist .pick-card::after{
+  content:"";
+  position:absolute;
+  left: 14px;
+  top: 14px;
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  border: 1px solid rgba(40,32,22,.35);
+  background: rgba(255,255,255,.72);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.75);
+}
+
+/* hover */
+.conclu2 #weaponsChecklist .pick-row:hover .pick-card{
+  transform: translateY(-1px);
+  box-shadow:
+    0 14px 28px rgba(0,0,0,.14),
+    inset 0 1px 0 rgba(255,255,255,.75);
+}
+
+/* marcado: ficha mais “presente” */
+.conclu2 #weaponsChecklist .pick-row input:checked + .pick-card{
+  background: rgba(250,247,242,.92);
+  border-color: rgba(40,32,22,.28);
+}
+
+/* check “✓” */
+.conclu2 #weaponsChecklist .pick-row input:checked + .pick-card::after{
+  content:"✓";
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight: 900;
+  font-size: 13px;
+  color: rgba(26,20,14,.92);
+
+  border-color: rgba(40,32,22,.45);
+  background: rgba(232,225,212,.90);
+}
+
+/* topo (titulo + chip) */
+.conclu2 #weaponsChecklist .pick-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap: 10px;
+}
+
+/* título mais limpo */
+.conclu2 #weaponsChecklist .pick-title{
+  font-weight: 900;
+  font-size: 13px;
+  line-height: 1.2;
+  color: rgba(26,20,14,.95);
+}
+
+/* descrição: curta, sem paredão */
+.conclu2 #weaponsChecklist .pick-sub{
+  margin-top: 6px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: rgba(40,32,22,.72);
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;          /* 2 linhas */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* chip do tipo */
+.conclu2 #weaponsChecklist .pick-chip{
+  flex: 0 0 auto;
+  padding: 4px 8px;
+  border-radius: 999px;
+
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+
+  color: rgba(26,20,14,.85);
+  background: rgba(232,225,212,.85);
+  border: 1px solid rgba(40,32,22,.22);
+}
+
+/* =========================================================
+   RESPONSIVO CONSOLIDADO (FINAL DO CSS)
+   - Padroniza breakpoints
+   - Evita conflito 700 vs 720
+   - Corrige iOS (vh/dvh + background-attachment)
+========================================================= */
+
+/* ---------- 1) REGRAS BASE SEGURAS (mobile-first) ---------- */
+
+/* iOS: background-attachment: fixed costuma quebrar */
+@media (max-width: 860px){
+  body{
+    background-attachment: scroll !important;
+  }
+}
+
+/* garante o overlay da mesa não ficar fora do fluxo */
+.main-cards{
+  position: relative; /* você tem ::before absolute; isso impede bugs */
+}
+
+/* imagens em modais: nunca “height:100%” sem container definido */
+.modal-body img{
+  width: 100%;
+  height: auto;
+  max-height: 60vh;
+  object-fit: contain; /* mostra inteira */
+}
+
+/* ---------- 2) BREAKPOINT: <= 1024px (tablet/pequeno desktop) ---------- */
+@media (max-width: 1024px){
+
+  .app{ padding: 16px 14px 96px; }
+
+  .modal-card{
+    width: min(860px, 96vw);
+    max-height: calc(100vh - 40px);
+  }
+
+  .nav-card--news .news-photo{
+    min-height: clamp(260px, 34vw, 380px);
+  }
+}
+
+/* ---------- 3) BREAKPOINT: <= 860px (tablet / landscape iPhone) ---------- */
+@media (max-width: 860px){
+
+  /* evita cards “tombados” no mobile/tablet */
+  .nav-card:nth-child(odd),
+  .nav-card:nth-child(even){
+    transform: none !important;
+  }
+
+  /* news */
+  .nav-card--news .news-body{
+    padding: 16px 16px 18px;
+  }
+
+  .nav-card--news .news-headline{
+    font-size: clamp(1.35rem, 4.2vw, 1.9rem);
+  }
+
+  /* modal/profile empilha melhor */
+  .profile{
+    grid-template-columns: 1fr;
+  }
+  .profile-media{
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  /* inventory: usa dvh no iOS pra não “comer” altura */
+  .inventory-drawer{
+    width: min(860px, 96vw);
+    height: min(78dvh, 720px); /* dvh é melhor no iPhone */
+  }
+}
+
+/* ---------- 4) BREAKPOINT: <= 640px (iPhone portrait) ---------- */
+@media (max-width: 640px){
+
+  .top-inner{
+    padding: 10px 12px;
+  }
+
+  .brand-title{ font-size: 11px; }
+  .brand-sub{ font-size: 11px; }
+
+  .main-cards{
+    padding: 12px;
+    gap: 14px;
+  }
+
+  /* cards */
+  .nav-card{
+    min-height: unset; /* evita altura forçada no mobile */
+  }
+
+  .nav-card--file .thumb{
+    height: 140px;
+  }
+
+  /* news: foto ocupa mais e fica bem wide */
+  .nav-card--news .news-photo{
+    min-height: 240px;
+    background-position: center;
+  }
+
+  /* modal: mais confortável no iPhone */
+  .modal{
+    padding: 12px;
+    align-items: flex-start;
+  }
+  .modal-card{
+    width: 100%;
+    border-radius: 18px;
+    max-height: calc(100dvh - 24px);
+  }
+  .modal-body{
+    padding: 14px;
+    max-height: calc(100dvh - 120px);
+  }
+
+  /* imagem do modal: inteira e grande, sem cortar */
+  .modal-body img{
+    max-height: 48dvh;
+    object-fit: contain;
+    border-radius: 14px;
+  }
+
+  /* inventory: mais “folha” no mobile */
+  .inventory-drawer{
+    top: 60px;
+    height: min(80dvh, 680px);
+    border-radius: 18px;
+  }
+  .inventory-head{
+    padding: 12px 14px 10px 52px;
+  }
+  .inventory-tabs{
+    padding: 8px 12px 10px 52px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .inventory-tabs .tab{
+    border-radius: 999px; /* no mobile vira “chips”, fica lindo e legível */
+    border-left: 1px solid rgba(40,32,22,.25); /* reabilita lateral no chip */
+  }
+}
+

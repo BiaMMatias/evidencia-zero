@@ -1,0 +1,62 @@
+{
+  "documentType": "Laudo de Autópsia",
+  "issuingAuthority": "Instituto Médico Legal",
+  "caseId": "HVC-2241",
+  "date": "[REDACTED]",
+  "confidential": true,
+  "victim": {
+    "name": "Henrique Valença",
+    "sex": "Masculino",
+    "age": 42,
+    "heightCm": 185,
+    "weightKg": 85
+  },
+  "death": {
+    "cause": "Asfixia mecânica por estrangulamento por laço",
+    "manner": "Homicídio",
+    "estimatedTimeOfDeath": {
+      "from": "22:35",
+      "to": "22:50"
+    },
+    "contributingFactors": [
+      "Presença de agentes sedativos (classe benzodiazepínica) detectados em triagem toxicológica"
+    ]
+  },
+  "bodyFindings": [
+    "Ausência de ferimentos de entrada por força externa",
+    "Hemorragias petequiais compatíveis com estrangulamento controlado",
+    "Ausência de ferimentos defensivos",
+    "Marcas finas de laço ao redor do pescoço, compatíveis com uso de cordão ou fio improvisado"
+  ],
+  "toxicologySummary": {
+    "sedativesDetected": true,
+    "dosage": "Baixa",
+    "lethalByItself": false,
+    "interpretation": "Achado compatível com redução de resistência prévia à asfixia"
+  },
+  "additionalNotes": "A análise conjunta dos achados sugere planejamento prévio, em detrimento de violência espontânea.",
+  "medicalExaminer": {
+    "name": "Carlos Almeida",
+    "role": "Médico Legista",
+    "registration": "CRM-P 10427",
+    "signature": true
+  },
+  "uiMetadata": {
+    "recommendedSections": [
+      "Identificação do Corpo",
+      "Causa da Morte",
+      "Modo de Morte",
+      "Tempo Estimado da Morte",
+      "Achados Corporais",
+      "Resumo Toxicológico",
+      "Observações"
+    ],
+    "highlightKeywords": [
+      "22:41",
+      "sedativo",
+      "estrangulamento",
+      "planejamento",
+      "ausência de ferimentos defensivos"
+    ]
+  }
+}
