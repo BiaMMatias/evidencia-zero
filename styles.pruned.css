@@ -3035,7 +3035,7 @@ body.debug-hotspots .hotspot{opacity: 1;
   /* botões: ocupam a largura e não ficam “impossíveis” */
   .cover-hero.cover-hero--full .cover-actions2{
     display: grid !important;
-    gap: 10px !important;
+    /* gap: 10px !important; */
     margin-top: 14px !important;
   }
   .cover-hero.cover-hero--full .cover-actions2 .btn{
