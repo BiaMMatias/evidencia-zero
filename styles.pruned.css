@@ -2688,376 +2688,150 @@ body.debug-hotspots .hotspot{opacity: 1;
   body{ background-attachment: scroll; }
 }
 
-/* =========================
-   FIX CAPA — iPhone / Mobile Safari
-   Cola no FINAL do CSS
-========================= */
+/* =========================================================
+   PATCH FINAL — CAPA iPhone (sem samba) + Botões ok
+   Cole no FINAL e APAGUE todos os blocos antigos de "FIX CAPA"
+========================================================= */
 
-:root{ --topbar-h: 74px; } /* ajuste se seu header for diferente */
+:root{
+  --topbar-h: 74px; /* ajuste se seu header for diferente */
+}
 
-@media (max-width: 820px){
+/* trava overflow lateral que faz “dança” no Safari */
+html, body{
+  max-width: 100%;
+  overflow-x: hidden;
+}
 
-  /* A capa passa a caber no viewport real do iPhone */
+/* ===== CAPA BASE (vale pra desktop e mobile) ===== */
+.cover-hero--full{
+  position: relative;
+  overflow: hidden;
+}
+
+.cover-hero--full .cover-bg{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* iOS sofre com transform+filter, então deixa leve no desktop e remove no mobile */
+  transform: scale(1.02);
+}
+
+.cover-hero--full .cover-overlay{
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  z-index: 2;
+}
+
+/* ===== MOBILE iPhone (o único media query da capa) ===== */
+@media (max-width: 720px){
+
+  /* usa dvh/svh pra iOS não “pular” */
   .cover-hero--full{
-    min-height: calc(100svh - var(--topbar-h) - 10px);
-    height: auto;
-    overflow: hidden;
+    min-height: calc(100dvh - var(--topbar-h));
   }
 
-  /* A imagem preenche sem “cortar demais” */
+  /* remove o que causa jitter no Safari */
   .cover-hero--full .cover-bg{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: none; /* remove scale no mobile */
+    transform: none !important;
+    filter: none !important;
   }
 
-  /* Em vez de centralizar no meio, “ancora” melhor no topo */
+  /* overlay vira flex e garante que nada “vaze” */
   .cover-hero--full .cover-overlay{
-    place-items: start center;
-    padding: 14px 14px calc(14px + env(safe-area-inset-bottom));
-    padding-top: calc(12px + env(safe-area-inset-top));
+    display: flex !important;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 14px 14px calc(14px + env(safe-area-inset-bottom)) !important;
+    padding-top: calc(12px + env(safe-area-inset-top)) !important;
+    box-sizing: border-box;
+    width: 100%;
   }
 
-  /* Bloco do carimbo menor + rolagem interna se precisar */
+  /* glass fica DENTRO do overlay, sem ultrapassar */
   .cover-glass{
-    width: min(92vw, 520px);
-    max-height: calc(100svh - var(--topbar-h) - 38px);
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
+    width: 100% !important;
+    max-width: 520px !important;
+    margin: 0 !important;
 
-    padding: 18px 18px;
-    border-radius: 18px;
-    transform: rotate(-1deg);
+    /* isso é o que impede o “samba” */
+    transform: none !important;
+    overflow: hidden !important;
   }
 
-  /* Título: não pode ser 70px no celular */
+  /* MUITO IMPORTANTE:
+     pseudo-elements com inset negativo ESTOURAM a largura no iPhone */
+  .cover-glass::before,
+  .cover-glass::after,
+  .cover-actions2 .btn::after{
+    inset: 0 !important;
+  }
+
+  /* tipografia */
   .cover-glass .cover-title,
-  .cover-glass h1{
-    font-size: clamp(34px, 9vw, 46px);
-    line-height: 1.02;
-    letter-spacing: .06em;
+  .cover-glass h1,
+  .cover-title{
+    font-size: clamp(34px, 9vw, 46px) !important;
+    line-height: 1.04;
   }
 
   .cover-sub2{
     font-size: 14px;
     line-height: 1.45;
-    font-weight: 600;
   }
 
-  /* Botões empilham */
-  .cover-actions2{
-    gap: 10px;
-  }
-  .cover-actions2 .btn{
-    width: 100%;
-    justify-content: center;
-    padding: 12px 14px;
-  }
-}
-
-/* iOS às vezes buga com background-attachment: fixed */
-@media (max-width: 820px){
-  body{ background-attachment: scroll; }
-}
-
-@media (max-width: 820px){
-  .app{ padding-top: 12px; }
-}
-
-/* =========================
-   MOBILE FIX — CAPA (iPhone)
-========================= */
-@media (max-width: 480px) {
-
-  /* capa não ocupa a tela inteira */
-  .cover-hero--full {
-    min-height: 100svh; /* svh funciona melhor no iOS */
-  }
-
-  /* vidro mais contido */
-  .cover-glass {
-    padding: 22px 20px;
-    transform: none; /* tira rotação no mobile */
-    border-width: 3px;
-  }
-
-  /* título não “grita” */
-  .cover-title {
-    font-size: 34px;
-    line-height: 1.05;
-    letter-spacing: 0.04em;
-  }
-
-  .cover-sub2 {
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 1.45;
-  }
-
-  .cover-footnote {
-    font-size: 13px;
-    font-weight: 700;
-    margin-top: 10px;
-  }
-
-  /* botões — esse é o ponto crítico */
-  .cover-actions2 {
-    gap: 10px;
-    margin-top: 16px;
-  }
-
-  .cover-actions2 .btn {
-    padding: 10px 14px;
-    font-size: 11px;
-    border-width: 2px;
-    letter-spacing: 0.12em;
-    transform: none; /* tira inclinação no mobile */
-  }
-}
-
-/* ===== FIX iPhone (capa): sem jitter, botões ok ===== */
-@media (max-width: 720px){
-
-  /* iOS treme com background-attachment: fixed */
-  body{
-    background-attachment: scroll !important;
-  }
-
-  /* capa ocupa a tela real do iPhone */
-  .cover-hero--full{
-    min-height: 100svh; /* melhor que vh no iOS */
-  }
-
-  /* se você usa <img class="cover-bg"> */
-  .cover-hero--full .cover-bg{
-    object-position: center top;
-    transform: none !important;
-  }
-
-  /* o “carimbo” não pode girar no mobile */
-  .cover-glass{
-    padding: 18px 16px !important;
-    transform: none !important;
-    border-radius: 18px;
-  }
-
-  .cover-glass .cover-title,
-  .cover-title{
-    font-size: clamp(34px, 9vw, 46px) !important;
-    line-height: 1.05;
-  }
-
-  /* botões: coluna + largura total */
+  /* botões empilham e cabem */
   .cover-actions2{
     display: grid !important;
     gap: 10px !important;
-  }
-  .cover-actions2 .btn{
-    width: 100%;
-    padding: 12px 14px !important;
-    font-size: 12px !important;
-    letter-spacing: .12em !important;
-    transform: none !important;
-  }
-}
-
-/* =========================
-   CAPA — vidro e botões mais sólidos
-   (cole no FINAL do CSS)
-========================= */
-
-/* bloco principal (menos transparente + mais legível) */
-.cover-glass{
-  background: rgba(231,220,201,.62) !important;  /* era .14 -> agora bem mais presente */
-  border-color: rgba(38,30,22,.55) !important;
-  box-shadow:
-    inset 0 0 0 2px rgba(38,30,22,.14),
-    inset 0 14px 22px rgba(0,0,0,.14),
-    0 18px 38px rgba(0,0,0,.18) !important;
-}
-
-/* texto da capa escurece um pouco (fica “tinta no papel”) */
-.cover-sub2{
-  color: rgba(28,22,16,.82) !important;
-}
-.cover-footnote{
-  color: rgba(28,22,16,.70) !important;
-}
-
-/* botões mais sólidos (menos transparente) */
-.cover-actions2 .btn{
-  background: rgba(231,220,201,.78) !important;
-  border-color: rgba(38,30,22,.55) !important;
-  color: rgba(26,20,14,.82) !important;
-}
-
-/* variações */
-.cover-actions2 .btn.primary{
-  background: rgba(176,123,18,.20) !important;
-  border-color: rgba(176,123,18,.70) !important;
-  color: rgba(92,64,10,.88) !important;
-}
-.cover-actions2 .btn.danger{
-  background: rgba(126,36,54,.16) !important;
-  border-color: rgba(126,36,54,.70) !important;
-  color: rgba(88,22,36,.88) !important;
-}
-
-/* iPhone: remove rotação e evita “dança” */
-@media (max-width: 720px){
-  .cover-glass{ transform: none !important; }
-  .cover-actions2 .btn{ transform: none !important; }
-}
-/* =========================
-   FIX iPhone — cover-glass não “samba”
-   (cole no FINAL do CSS)
-========================= */
-
-@media (max-width: 720px){
-
-  /* 1) mata qualquer overflow horizontal (o que causa o “samba”) */
-  html, body{
-    overflow-x: hidden;
-    width: 100%;
-  }
-
-  /* 2) capa sem efeitos que tremem no Safari */
-  .cover-hero--full{
-    overflow: hidden;
-    overflow-x: hidden;
-  }
-
-  .cover-hero--full .cover-bg{
-    transform: none !important;
-    filter: none !important; /* opcional, mas ajuda MUITO no iOS */
-  }
-
-  /* 3) overlay com padding menor */
-  .cover-hero--full .cover-overlay{
-    padding: 12px 12px calc(14px + env(safe-area-inset-bottom)) !important;
-    place-items: start center !important;
-    overflow-x: hidden;
-  }
-
-  /* 4) O principal: largura real do “glass” sem ultrapassar */
-  .cover-glass{
-    box-sizing: border-box;
-    width: calc(90vw - 24px) !important;   /* 12px de cada lado */
-    max-width: auto !important;
-    margin: 0 auto;
-    transform: none !important;            /* tira rotação no iPhone */
-    overflow: visible !important;          /* evita scroll interno tremendo */
-    overflow-x: hidden;
-  }
-
-  /* 5) botões em coluna (sem “puxar” largura) */
-  .cover-actions2{
-    display: grid !important;
-    gap: 10px !important;
+    margin-top: 14px !important;
   }
 
   .cover-actions2 .btn{
-    width: 100%;
-    transform: none !important;
-  }
-}
-
-/* =========================
-   MOBILE: cover-glass “dentro” do overlay
-========================= */
-@media (max-width: 720px){
-
-  /* overlay vira o “container” real */
-  .cover-hero--full .cover-overlay{
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-
-    /* centraliza e garante padding interno */
-    display: flex !important;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 12px 12px calc(14px + env(safe-area-inset-bottom)) !important;
-  }
-
-  /* glass ocupa o overlay (sem passar da borda) */
-  .cover-hero--full .cover-glass{
-    box-sizing: border-box;
-    width: 100% !important;          /* agora é 100% do overlay */
-    max-width: 520px !important;     /* limite “bonito” */
-    margin: 0 !important;            /* já tá centralizado pelo overlay */
-    transform: none !important;      /* sem rotação no iPhone */
-    overflow: visible !important;    /* evita jitter */
-  }
-
-  /* botões sempre “dentro” e em coluna */
-  .cover-actions2{
-    display: grid !important;
-    gap: 10px !important;
-  }
-  .cover-actions2 .btn{
-    width: 100%;
-    transform: none !important;
-  }
-}
-
-/* =========================
-   FIX CAPA iPhone — botões cabem + sem samba
-   (cole no FINAL do CSS)
-========================= */
-@media (max-width: 720px){
-
-  /* garante área total da capa no viewport do iPhone */
-  .cover-hero.cover-hero--full .cover-overlay .cover-glass{
-    width: min(92vw, 520px) !important;
-
-    /* ↓ aqui é a correção */
-    max-height: none !important;
-    overflow: hidden !important;
-    overflow-x: hidden !important;
-    padding: 10px !important;
-    transform: none !important;
-  }
-
-  /* overlay vira flex pra controlar melhor */
-  .cover-hero.cover-hero--full .cover-overlay{
-    display: flex !important;
-    align-items: flex-start !important;
-    justify-content: center !important;
-    padding: 10px calc(16px + env(safe-area-inset-bottom)) !important;
-  }
-
-  /* o “glass” agora cabe sempre e, se precisar, rola por dentro */
-  .cover-hero.cover-hero--full .cover-overlay .cover-glass{
-    width: min(92vw, 520px) !important;
-    max-height: calc(100dvh - 74px - 24px) !important;
-    overflow: hidden !important;
-    overflow-x: hidden !important;
-    -webkit-overflow-scrolling: touch !important;
-
-    padding: 10px !important;
-    transform: none !important; /* evita jitter no iOS */
-  }
-
-  /* botões: ocupam a largura e não ficam “impossíveis” */
-  .cover-hero.cover-hero--full .cover-actions2{
-    display: grid !important;
-    /* gap: 10px !important; */
-    margin-top: 10px !important;
-  }
-  .cover-hero.cover-hero--full .cover-actions2 .btn{
     width: 100% !important;
-    padding: 10px !important;
+    padding: 12px 14px !important;
     transform: none !important;
   }
 
-  /* um respiro extra pro último botão não “raspar” */
-  .cover-hero.cover-hero--full .cover-footnote{
-    margin-bottom: 5px !important;
+  /* respiro pro último botão não colar no fim */
+  .cover-glass{
+    padding-bottom: 18px !important;
   }
-  .cover-hero.cover-hero--full{
-    min-height: calc(100dvh - 74px) !important;
-    padding-bottom: 10px !important; /* respiro extra pros botões */
-  }
+}
+/* =========================================================
+   HOTSPOT — definitivo (sem "?" na tela)
+========================================================= */
+
+.hotspot{
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+
+  /* invisível mas clicável (ajuste opacity se quiser ver) */
+  opacity: 0;
+  background: transparent;
+  border: 0;
+
+  cursor: zoom-in;
+}
+
+/* não renderiza texto NUNCA */
+.hotspot::before,
+.hotspot::after{
+  content: none !important;
+}
+
+/* debug opcional: se colocar class debug-hotspots no body */
+body.debug-hotspots .hotspot{
+  opacity: 1;
+  background: rgba(255, 210, 0, 0.20);
+  border: 2px solid rgba(180, 120, 0, 0.55);
 }
