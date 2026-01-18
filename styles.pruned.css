@@ -2985,6 +2985,7 @@ body.debug-hotspots .hotspot{opacity: 1;
   .cover-hero--full .cover-glass{
     box-sizing: border-box;
     width: 100% !important;          /* agora é 100% do overlay */
+    height: 100% !important;
     max-width: 520px !important;     /* limite “bonito” */
     margin: 0 !important;            /* já tá centralizado pelo overlay */
     transform: none !important;      /* sem rotação no iPhone */
