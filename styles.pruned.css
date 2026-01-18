@@ -2759,3 +2759,56 @@ body.debug-hotspots .hotspot{opacity: 1;
 @media (max-width: 820px){
   body{ background-attachment: scroll; }
 }
+
+@media (max-width: 820px){
+  .app{ padding-top: 12px; }
+}
+
+/* =========================
+   MOBILE FIX — CAPA (iPhone)
+========================= */
+@media (max-width: 480px) {
+
+  /* capa não ocupa a tela inteira */
+  .cover-hero--full {
+    min-height: 100svh; /* svh funciona melhor no iOS */
+  }
+
+  /* vidro mais contido */
+  .cover-glass {
+    padding: 22px 20px;
+    transform: none; /* tira rotação no mobile */
+    border-width: 3px;
+  }
+
+  /* título não “grita” */
+  .cover-title {
+    font-size: 34px;
+    line-height: 1.05;
+    letter-spacing: 0.04em;
+  }
+
+  .cover-sub2 {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .cover-footnote {
+    font-size: 13px;
+    margin-top: 10px;
+  }
+
+  /* botões — esse é o ponto crítico */
+  .cover-actions2 {
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .cover-actions2 .btn {
+    padding: 10px 14px;
+    font-size: 11px;
+    border-width: 2px;
+    letter-spacing: 0.12em;
+    transform: none; /* tira inclinação no mobile */
+  }
+}
