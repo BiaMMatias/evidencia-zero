@@ -3014,8 +3014,8 @@ body.debug-hotspots .hotspot{opacity: 1;
 
     /* ↓ aqui é a correção */
     max-height: none !important;
-    overflow: visible !important;
-
+    overflow: hidden !important;
+    overflow-x: hidden !important;
     padding: 10px !important;
     transform: none !important;
   }
