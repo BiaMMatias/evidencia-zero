@@ -3016,7 +3016,7 @@ body.debug-hotspots .hotspot{opacity: 1;
     max-height: none !important;
     overflow: visible !important;
 
-    padding: 18px 16px 16px !important;
+    padding: 10px !important;
     transform: none !important;
   }
 
@@ -3025,7 +3025,7 @@ body.debug-hotspots .hotspot{opacity: 1;
     display: flex !important;
     align-items: flex-start !important;
     justify-content: center !important;
-    padding: 12px 12px calc(16px + env(safe-area-inset-bottom)) !important;
+    padding: 10px calc(16px + env(safe-area-inset-bottom)) !important;
   }
 
   /* o “glass” agora cabe sempre e, se precisar, rola por dentro */
@@ -3035,7 +3035,7 @@ body.debug-hotspots .hotspot{opacity: 1;
     overflow: auto !important;
     -webkit-overflow-scrolling: touch !important;
 
-    padding: 18px 16px 16px !important;
+    padding: 10px !important;
     transform: none !important; /* evita jitter no iOS */
   }
 
@@ -3047,16 +3047,16 @@ body.debug-hotspots .hotspot{opacity: 1;
   }
   .cover-hero.cover-hero--full .cover-actions2 .btn{
     width: 100% !important;
-    padding: 12px 14px !important;
+    padding: 10px !important;
     transform: none !important;
   }
 
   /* um respiro extra pro último botão não “raspar” */
   .cover-hero.cover-hero--full .cover-footnote{
-    margin-bottom: 10px !important;
+    margin-bottom: 5px !important;
   }
   .cover-hero.cover-hero--full{
     min-height: calc(100dvh - 74px) !important;
-    padding-bottom: 18px !important; /* respiro extra pros botões */
+    padding-bottom: 10px !important; /* respiro extra pros botões */
   }
 }
