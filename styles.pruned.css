@@ -3009,8 +3009,15 @@ body.debug-hotspots .hotspot{opacity: 1;
 @media (max-width: 720px){
 
   /* garante área total da capa no viewport do iPhone */
-  .cover-hero.cover-hero--full{
-    min-height: calc(100dvh - 74px) !important; /* 74px ~ topbar */
+  .cover-hero.cover-hero--full .cover-overlay .cover-glass{
+    width: min(92vw, 520px) !important;
+
+    /* ↓ aqui é a correção */
+    max-height: none !important;
+    overflow: visible !important;
+
+    padding: 18px 16px 16px !important;
+    transform: none !important;
   }
 
   /* overlay vira flex pra controlar melhor */
@@ -3047,5 +3054,9 @@ body.debug-hotspots .hotspot{opacity: 1;
   /* um respiro extra pro último botão não “raspar” */
   .cover-hero.cover-hero--full .cover-footnote{
     margin-bottom: 10px !important;
+  }
+  .cover-hero.cover-hero--full{
+    min-height: calc(100dvh - 74px) !important;
+    padding-bottom: 18px !important; /* respiro extra pros botões */
   }
 }
