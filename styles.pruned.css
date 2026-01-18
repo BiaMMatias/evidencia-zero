@@ -2946,8 +2946,8 @@ body.debug-hotspots .hotspot{opacity: 1;
   /* 4) O principal: largura real do “glass” sem ultrapassar */
   .cover-glass{
     box-sizing: border-box;
-    width: calc(100vw - 24px) !important;   /* 12px de cada lado */
-    max-width: 520px !important;
+    width: calc(90vw - 24px) !important;   /* 12px de cada lado */
+    max-width: auto !important;
     margin: 0 auto;
     transform: none !important;            /* tira rotação no iPhone */
     overflow: visible !important;          /* evita scroll interno tremendo */
