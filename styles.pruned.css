@@ -2912,3 +2912,53 @@ body.debug-hotspots .hotspot{opacity: 1;
   .cover-glass{ transform: none !important; }
   .cover-actions2 .btn{ transform: none !important; }
 }
+/* =========================
+   FIX iPhone — cover-glass não “samba”
+   (cole no FINAL do CSS)
+========================= */
+
+@media (max-width: 720px){
+
+  /* 1) mata qualquer overflow horizontal (o que causa o “samba”) */
+  html, body{
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  /* 2) capa sem efeitos que tremem no Safari */
+  .cover-hero--full{
+    overflow: hidden;
+  }
+
+  .cover-hero--full .cover-bg{
+    transform: none !important;
+    filter: none !important; /* opcional, mas ajuda MUITO no iOS */
+  }
+
+  /* 3) overlay com padding menor */
+  .cover-hero--full .cover-overlay{
+    padding: 12px 12px calc(14px + env(safe-area-inset-bottom)) !important;
+    place-items: start center !important;
+  }
+
+  /* 4) O principal: largura real do “glass” sem ultrapassar */
+  .cover-glass{
+    box-sizing: border-box;
+    width: calc(100vw - 24px) !important;   /* 12px de cada lado */
+    max-width: 520px !important;
+    margin: 0 auto;
+    transform: none !important;            /* tira rotação no iPhone */
+    overflow: visible !important;          /* evita scroll interno tremendo */
+  }
+
+  /* 5) botões em coluna (sem “puxar” largura) */
+  .cover-actions2{
+    display: grid !important;
+    gap: 10px !important;
+  }
+
+  .cover-actions2 .btn{
+    width: 100%;
+    transform: none !important;
+  }
+}
