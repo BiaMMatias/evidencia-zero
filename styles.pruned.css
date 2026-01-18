@@ -2986,6 +2986,7 @@ body.debug-hotspots .hotspot{opacity: 1;
     box-sizing: border-box;
     width: 100% !important;          /* agora é 100% do overlay */
     height: 100% !important;
+    max-height: fit-content;
     max-width: 520px !important;     /* limite “bonito” */
     margin: 0 !important;            /* já tá centralizado pelo overlay */
     transform: none !important;      /* sem rotação no iPhone */
