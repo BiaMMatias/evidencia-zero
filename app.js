@@ -526,9 +526,9 @@ const CRIME_SCENE = {
   },
 
   hotspots: [
-    { ev: 1, x: 33, y: 60 },
-    { ev: 2, x: 86, y: 40 },
-    { ev: 3, x: 36, y: 32 },
+    { ev: 1, x: 42, y: 58 },
+    { ev: 2, x: 73, y: 40 },
+    { ev: 3, x: 43, y: 32 },
   ],
 };
 
@@ -545,8 +545,8 @@ const SCENES = {
         type: "Registro",
         location: "Portaria (balcão / terminal)",
         zoomImage: "./assets/evidence/portaria_logs.png",
-        x: 60,
-        y: 45,
+        x: 58,
+        y: 42,
         forensicText:
           "Tela/registro de acesso com atividade no intervalo crítico. Dados sensíveis devem estar ilegíveis, mas a presença do log e o padrão temporal são relevantes.",
         clue: {
@@ -563,8 +563,8 @@ const SCENES = {
         type: "Documento",
         location: "Portaria (livro físico)",
         zoomImage: "./assets/evidence/livro_portaria.png",
-        x: 47,
-        y: 60,
+        x: 48,
+        y: 53,
         forensicText:
           "Linha de troca de turno/registro com rasura evidente. A rasura é o dado: indica tentativa de corrigir narrativa após o evento.",
         clue: {
@@ -590,7 +590,7 @@ const SCENES = {
         type: "Vestígio",
         location: "Corredor de serviço (setor técnico)",
         zoomImage: "./assets/evidence/corredor_zoom.png",
-        x: 78,
+        x: 68,
         y: 70,
         forensicText:
           "Reflexo metálico discreto identificado no piso do corredor de serviço, compatível com objeto pequeno de superfície polida. A orientação do brilho sugere deslocamento em área de iluminação contínua, possivelmente associado a chaveiro ou chave mestra em movimento.",
@@ -617,7 +617,7 @@ const SCENES = {
         type: "Documento",
         location: "Clínica (gaveteiro / balcão)",
         zoomImage: "./assets/evidence/receitas_clinica.png",
-        x: 50,
+        x: 54,
         y: 50,
         forensicText:
           "Pilha de prescrições/receituários associada a sedativos. Sem nomes legíveis. A repetição e o volume sugerem padrão, não exceção.",
@@ -644,7 +644,7 @@ const SCENES = {
         type: "Documento",
         location: "Escritório (pasta / mesa)",
         zoomImage: "./assets/evidence/apolice.png",
-        x: 80,
+        x: 70,
         y: 60,
         forensicText:
           "Documento de seguro com sinal de atualização recente. Não ler nomes/CPF — o importante é a existência do vínculo financeiro e a data de modificação.",
@@ -662,7 +662,7 @@ const SCENES = {
         type: "Documento",
         location: "Escritório de Bruno (mesa)",
         zoomImage: "./assets/evidence/receita.png",
-        x: 60,
+        x: 55,
         y: 68,
         forensicText:
           "Receituário médico de zolpidem em nome de Henrique Valença, encontrado sobre a mesa do escritório de Bruno. A presença do documento fora do ambiente clínico sugere acesso indireto ou retenção intencional da prescrição.",
@@ -1434,12 +1434,8 @@ function renderCover(state) {
   const hasProgress = !!state.startedAt;
 
   ui.app.innerHTML = `
-    <section class="cover-hero cover-hero--full">
-      <!-- imagem ocupando 100% do bloco -->
-      
-
-      <!-- conteúdo por cima (título + texto + botões) -->
-      <div class="cover-overlay">
+    <section class="">
+        
         <div class="cover-glass">
 
           <h1 class="cover-title" data-text="${escapeHtml(CASE.cover?.headline || "EVIDÊNCIA ZERO")}">
@@ -1465,7 +1461,7 @@ function renderCover(state) {
 
           
         </div>
-      </div>
+      
     </section>
   `;
 
@@ -1915,8 +1911,8 @@ function openCrimeSceneModal(state) {
         Clique na imagem para investigar pontos de interesse. Nem tudo está visível à primeira vista.
       </div>
 
-      <div class="scene-wrap scene-investigate">
-        <img class="scene-img" src="${escapeHtml(
+      <div class="scene-image-wrap scene-investigate">
+        <img class="scene-image" src="${escapeHtml(
           CRIME_SCENE.sceneImage
         )}" alt="Cena do crime com marcadores de evidência" />
         ${hotspotsHtml}
@@ -1964,7 +1960,7 @@ function openSceneModal(state, sceneId) {
             .join("")}
         </div>
 
-        <div class="scene-hint">${escapeHtml(scene.hint || "")}</div>
+        <div class="scene-caption profile-actions">${escapeHtml(scene.hint || "")}</div>
       </div>
     `
   );
@@ -2516,18 +2512,18 @@ function renderHub(state) {
           state.solution?.rare ? "rare-variant" : ""
         }" id="cardCrime" data-open="crime">
           <div class="news-photo">
-          ${
-            state.solution?.rare
-              ? `
-              <div class="rare-stamp-wrap">
-                <span class="rare-stamp" title="Existe uma variação rara possível neste caso.">
-                  <span class="dot"></span>
-                  POSSÍVEL VARIAÇÃO
-                </span>
-              </div>
-    `
-              : ""
-          }
+            ${
+              state.solution?.rare
+                ? `
+                <div class="rare-stamp-wrap">
+                  <span class="rare-stamp" title="Existe uma variação rara possível neste caso.">
+                    <span class="dot"></span>
+                    POSSÍVEL VARIAÇÃO
+                  </span>
+                </div>
+            `
+                : ""
+            }
             <div class="news-photo">
               <img src="${escapeHtml(IMG.crime)}" alt="Cena (genérica)">
             </div>
@@ -2546,7 +2542,6 @@ function renderHub(state) {
             <p class="news-sub">${escapeHtml(crimeHeadline)}</p>
 
             <div class="news-footer">
-              <span class="byline">Arquivo de Investigação • Evidência Zero</span>
               <span class="stamp-mini">ABRIR</span>
             </div>
           </div>
